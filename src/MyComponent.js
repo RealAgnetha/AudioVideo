@@ -8,6 +8,8 @@ const MyComponent = () => {
     const canvasRef = useRef(null);
     const fileInputRef = useRef(null);
     const [fileSelected, setFileSelected] = useState(false) //when file has been selected, change state
+    const [isPlaying, setIsPlaying] = useState(false); // state for play/pause button
+
 
     useEffect(() => {
         const video = videoRef.current;
@@ -32,6 +34,18 @@ const MyComponent = () => {
         setFileSelected(true);
     };
 
+    const handlePlayClick = () => {
+        // When the play button is clicked, play the video and update the state
+        videoRef.current.play();
+        setIsPlaying(true);
+    };
+
+    const handlePauseClick = () => {
+        // When the pause button is clicked, pause the video and update the state
+        videoRef.current.pause();
+        setIsPlaying(false);
+    };
+
     return (
         <div className="wrapper">
             {!fileSelected && ( // Only show the input if the file has not been selected
@@ -43,6 +57,15 @@ const MyComponent = () => {
                 />
             )}
             <video ref={videoRef} controls style={{position: "absolute", width: "100%"}}/>
+            <div style={{ position: "relative", zIndex: 1 }}>
+                {!isPlaying && (
+                    <button onClick={handlePlayClick}>Play</button>
+                )}
+                {isPlaying && (
+                    <button onClick={handlePauseClick}>Pause</button>
+                )}
+            </div>
+
             <canvas
                 ref={canvasRef}
                 width={videoWidth}
@@ -51,6 +74,6 @@ const MyComponent = () => {
             />
         </div>
     );
-
 };
+
 export {MyComponent};

@@ -66,22 +66,21 @@ body{
 /* Styling for Editing */
 .wrapper {
     width: 60%;
-    height: 500px;
+    height: auto;
     position: relative;
     max-width: 90%;
-    padding: 1rem;
     border-radius: 4px;
     margin: auto;
+    padding: 1rem 1rem 3em;
     float: left;
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-
 }
 
 .video {
     width: 100%;
-    position: absolute;
+    padding-bottom: 3em;
     cursor: pointer;
     border-radius: 1em;
 }
