@@ -73,10 +73,9 @@ body{
     padding: 1rem;
     border-radius: 4px;
     margin: auto;
-    position: absolute;
+    float: left;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */

@@ -5,8 +5,8 @@ class Meme_Data extends React.Component {
 
     render = () => {
         return (
-            <div>
-                <p>Hello World</p>
+            <div className={"wrapperForMemes"}>
+                <p>Hier kommt die Meme-Datenbank hin</p>
             </div>
         )
     }
