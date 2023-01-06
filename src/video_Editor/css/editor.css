@@ -14,7 +14,7 @@ body{
     border: 0.2em solid #f04e26;
     border-radius: 1em;
     text-align: center;
-    padding: 8em 0em;
+    padding: 8em 0;
     cursor: pointer;
 }
 
@@ -33,7 +33,7 @@ body{
     margin: 2em;
     text-align: center;
     border-radius: 1em;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 1px 3px 1px;
 }
 
 .toggle{
@@ -52,10 +52,7 @@ body{
     right: 1em;
     cursor: pointer;
     transition: background-color .2s ease;
-    -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 
@@ -69,17 +66,14 @@ body{
 /* Styling for Editing */
 .wrapper {
     width: 60%;
+    height: 500px;
+    position: relative;
     max-width: 90%;
     padding: 1rem;
     border-radius: 4px;
     margin: auto;
     float: left;
-    top: 50%;
-    left: 50%;
-    -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 
@@ -87,18 +81,16 @@ body{
 
 .video {
     width: 100%;
+    position: absolute;
     cursor: pointer;
     border-radius: 1em;
 }
 
 .playback {
     position: relative;
-    margin-top: 1rem;
-    margin-left: 24px;
-    margin-right: 24px;
     height: 10px;
     background: #2f3b44;
-    margin-bottom: 1rem;
+    margin: 1rem 24px;
     border-radius: 1em;
 }
 .playback .seekable {
@@ -243,7 +235,7 @@ body{
 }
 
 .margined{
-    margin: 0em 0.3em;
+    margin: 0 0.3em;
 }
 
 .warning{
@@ -267,5 +259,5 @@ body{
 }
 
 .marginVertical{
-    margin: 1.5em 0em;
+    margin: 1.5em 0;
 }

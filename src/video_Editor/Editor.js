@@ -319,7 +319,7 @@ class Editor extends React.Component {
                     </div>
                 </div>
                 {this.state.current_warning != null ? <div className={"warning"}>{this.warnings[this.state.current_warning]}</div> : ""}
-                {(this.state.imageUrl != "") ?
+                {(this.state.imageUrl !== "") ?
                     <div className={"marginVertical"}>
                         <img src={this.state.imageUrl} className={"thumbnail"} />
                         <div className="controls">
