@@ -1,9 +1,7 @@
-body{
+body {
     transition: background-color .3s ease, color .3s ease;
 }
 
-
-/* Styling for Editing */
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -31,49 +29,12 @@ body{
     width: 60%;
     padding: 1rem 1rem 3em;
     float: left;
-
 }
 
 
-
-/**These are premade and i didnt modify them or use them yet*/
-
-.file-drop{
-    width: 100%;
-    height: fit-content;
-    font-weight: bold;
-    font-size: large;
-}
-
-.file-drop > .file-drop-target{
-    transition: border-color .3s ease;
-    border: 0.2em solid #f04e26;
-    border-radius: 1em;
-    text-align: center;
-    padding: 8em 0;
-    cursor: pointer;
-}
-
-.file-drop > .file-drop-target.file-drop-dragging-over-target{
-    border-color: #90ee90;
-    transition: border-color .3s ease;
-    color: #cacaca
-}
-
-.hidden{
-    display: none;
-}
-
-.toolBar{
-    padding: 1em;
-    margin: 2em;
-    text-align: center;
-    border-radius: 1em;
-    box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 1px 3px 1px;
-}
-
-.toggle{
-    background-color:rgb(185, 185, 185);
+/**The following are premade and i didnt modify them or use them yet*/
+.toggle {
+    background-color: rgb(185, 185, 185);
     color: yellow;
     height: 2em;
     width: 2em;
@@ -94,9 +55,9 @@ body{
 
 }
 
-.toggle:hover{
+.toggle:hover {
     transition: background-color .2s ease;
-    background-color:rgb(146, 146, 146);
+    background-color: rgb(146, 146, 146);
 }
 
 
@@ -107,6 +68,7 @@ body{
     margin: 1rem 24px;
     border-radius: 1em;
 }
+
 .playback .seekable {
     position: absolute;
     top: 0;
@@ -116,6 +78,7 @@ body{
     background: rgb(240, 240, 240);
     cursor: pointer;
 }
+
 .playback .grabber {
     position: absolute;
     top: -4px;
@@ -130,20 +93,25 @@ body{
     align-items: center;
     justify-content: center;
 }
+
 .playback .grabber.start {
     background: #a8d736;
 }
+
 .playback .grabber.end {
     background: #fc4242;
 }
+
 .playback .grabber:hover {
     transform: scaleY(1.4);
 }
+
 .playback .grabber svg {
     user-drag: none;
     -moz-user-select: none;
     -webkit-user-drag: none;
 }
+
 .playback .progress {
     background: #0072cf;
     position: absolute;
@@ -154,105 +122,7 @@ body{
     pointer-events: none;
 }
 
-.controls {
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-}
-.controls .player-controls button {
-    width: 34px;
-    margin: 0 0.125rem;
-}
-.controls .player-controls .play-control {
-    background: #2f3b44;
-    border: 0;
-    color: #a5b0b5;
-    padding: 0.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-.controls .player-controls .play-control:hover {
-    background: #445562;
-}
-.controls .player-controls .play-control:active {
-    color: #ffffff;
-}
-.controls .player-controls .seek-start {
-    background: #2f3b44;
-    border: 0;
-    color: #a5b0b5;
-    padding: 0.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-.controls .player-controls .seek-start:hover {
-    background: #445562;
-}
-.controls .player-controls .seek-start:active {
-    color: #ffffff;
-}
-.controls .player-controls .seek-end {
-    background: #2f3b44;
-    border: 0;
-    color: #a5b0b5;
-    padding: 0.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-.controls .player-controls .seek-end:hover {
-    background: #445562;
-}
-.controls .player-controls .seek-end:active {
-    color: #ffffff;
-}
-.controls .settings-control {
-    background: #2f3b44;
-    border: 0;
-    color: #a5b0b5;
-    padding: 0.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.controls .settings-control:active {
-    color: #ffffff;
-}
-
-.controls .settings-control:hover {
-    background: #445562;
-}
-.controls .trim-control {
-    background: #0072cf;
-    border: 0;
-    color: #fff;
-    padding: 0.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-}
-.controls .trim-control:hover {
-    background: #038eff;
-}
-
-.margined{
-    margin: 0 0.3em;
-}
-
-.warning{
+.warning {
     padding: 0.8em;
     color: #da7f00;
     background-color: #ffecd1;
@@ -261,17 +131,4 @@ body{
     margin: 1em;
     justify-content: center;
     text-align: center;
-}
-
-.thumbnail{
-    width: 20%;
-    height: auto;
-    justify-content: center;
-    align-items: center;
-    border: 0.2em solid black;
-    border-radius: 0.3em;
-}
-
-.marginVertical{
-    margin: 1.5em 0;
 }

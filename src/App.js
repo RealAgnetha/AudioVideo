@@ -1,4 +1,3 @@
-import Editor from './video_Editor/VideoEditor'
 import Meme_Data from "./video_Editor/Meme_Data";
 import {MyComponent} from "./MyComponent.js";
 
