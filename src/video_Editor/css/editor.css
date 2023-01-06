@@ -2,6 +2,42 @@ body{
     transition: background-color .3s ease, color .3s ease;
 }
 
+
+/* Styling for Editing */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 60%;
+    position: relative;
+    border-radius: 4px;
+    margin: auto;
+    padding: 1rem 1rem;
+    float: left;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+.video {
+    flex: 1;
+    width: 100%;
+    height: 33.75%; /* calculated based on aspect ratio */
+    cursor: pointer;
+    border-radius: 1em;
+}
+
+.edit_video {
+    width: 60%;
+    padding: 1rem 1rem 3em;
+    float: left;
+
+}
+
+
+
+/**These are premade and i didnt modify them or use them yet*/
+
 .file-drop{
     width: 100%;
     height: fit-content;
@@ -63,27 +99,6 @@ body{
     background-color:rgb(146, 146, 146);
 }
 
-/* Styling for Editing */
-.wrapper {
-    width: 60%;
-    height: auto;
-    position: relative;
-    max-width: 90%;
-    border-radius: 4px;
-    margin: auto;
-    padding: 1rem 1rem 3em;
-    float: left;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-}
-
-.video {
-    width: 100%;
-    padding-bottom: 3em;
-    cursor: pointer;
-    border-radius: 1em;
-}
 
 .playback {
     position: relative;

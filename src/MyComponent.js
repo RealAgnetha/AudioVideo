@@ -7,8 +7,11 @@ const MyComponent = () => {
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
     const fileInputRef = useRef(null);
+    const progressBarRef = useRef(null);
     const [fileSelected, setFileSelected] = useState(false) //when file has been selected, change state
     const [isPlaying, setIsPlaying] = useState(false); // state for play/pause button
+    const [progress, setProgress] = useState(0); // current progress of the video, in percent
+    const [isDragging, setIsDragging] = useState(false); // flag to indicate if progress bar is being dragged
 
 
     useEffect(() => {
@@ -46,34 +49,73 @@ const MyComponent = () => {
         setIsPlaying(false);
     };
 
+    const handleTimeUpdate = () => {
+        // Calculate the progress of the video, in percent
+        const progress = (videoRef.current.currentTime / videoRef.current.duration) * 100;
+        setProgress(progress);
+    };
+
+    const handleProgressBarClick = (event) => {
+        // Calculate the new time based on the clicked position on the progress bar
+        const newTime = (event.clientX - progressBarRef.current.offsetLeft) / progressBarRef.current.offsetWidth;
+        videoRef.current.currentTime = newTime * videoRef.current.duration;
+    };
+
+    const handleProgressBarMouseDown = () => {
+        setIsDragging(true);
+    };
+
+    const handleDocumentMouseMove = (event) => {
+        if (!isDragging) {
+            return;
+        }
+
+        // Calculate the new time based on the current mouse position
+        const newTime = (event.clientX - progressBarRef.current.offsetLeft) / progressBarRef.current.offset
+    }
+
+
     return (
         <div className="wrapper">
-            {!fileSelected && ( // Only show the input if the file has not been selected
+            {!fileSelected && (
                 <input
                     ref={fileInputRef}
                     type="file"
                     accept="video/*"
+                    style={{ zIndex: 2}}
                     onChange={handleFileSelect}
                 />
+
             )}
-            <video ref={videoRef} controls style={{position: "absolute", width: "100%"}}/>
-            <div style={{ position: "relative", zIndex: 1 }}>
-                {!isPlaying && (
+            <video ref={videoRef} /*controls*/ style={{ flex: 1, display: fileSelected ? "block" : "none" }}
+            onTimeUpdate={handleTimeUpdate}
+            />
+            <canvas
+                ref={canvasRef}
+                width={videoWidth}
+                height={videoHeight}
+                style={{ zIndex: 1, position: "absolute", width: "100%" }}
+            />
+
+            <div
+                ref={progressBarRef}
+                className="progress-bar"
+                style={{ width: `${progress}%`, height: "10px", backgroundColor: "blue" }}
+                onClick={handleProgressBarClick}
+                onMouseDown={handleProgressBarMouseDown}
+
+            />
+            <div className="edit_video" style={{ display: fileSelected ? "block" : "none" }}>                {!isPlaying && (
                     <button onClick={handlePlayClick}>Play</button>
                 )}
                 {isPlaying && (
                     <button onClick={handlePauseClick}>Pause</button>
                 )}
-            </div>
 
-            <canvas
-                ref={canvasRef}
-                width={videoWidth}
-                height={videoHeight}
-                style={{zIndex: 1, position: "absolute", width: "100%"}}
-            />
+            </div>
         </div>
     );
+
 };
 
 export {MyComponent};
