@@ -95,6 +95,24 @@ const MyComponent = () => {
         videoRef.current.currentTime = percent * videoRef.current.duration;
     };
 
+    const handleDrop = (e) => {
+        e.preventDefault();
+        const img = new Image();
+        img.src = e.dataTransfer.getData('text/plain');
+        img.style.top = `${e.clientY}px`;
+        img.style.left = `${e.clientX}px`;
+        canvasRef.current.appendChild(img);
+    };
+
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+    };
+
+    const handleDragStart = (e) => {
+        e.dataTransfer.setData('text/plain', e.target.src);
+    }
+
     return (
         <div
             ref={wrapperRef}
@@ -112,6 +130,9 @@ const MyComponent = () => {
             )}
             <canvas
                 ref={canvasRef}
+                onDrop={handleDrop}
+                onDragOver={handleDragOver}
+                onDragStart={handleDragStart}
                 width={videoRef.current ? videoRef.current.offsetWidth : 0}
                 height={videoRef.current ? videoRef.current.offsetHeight : 0}
                 style={{

@@ -2,4 +2,13 @@
     width: 30%;
     max-width: 30%;
     float: right;
+    display: flex;
+    flex-direction: column;
 }
+
+.equal-size {
+    width: 150px;
+    height: 150px;
+}
+
+
