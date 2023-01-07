@@ -10,8 +10,8 @@ body {
 }
 
 .edit_video {
+    padding-top: 20px;
     width: 60%;
-    padding: 1rem 1rem 3em;
     float: left;
 }
 

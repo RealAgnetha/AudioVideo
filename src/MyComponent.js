@@ -50,31 +50,6 @@ const MyComponent = () => {
         setIsPlaying(false);
     };
 
-    const handleTimeUpdate = () => {
-        // Calculate the progress of the video, in percent
-        const progress = (videoRef.current.currentTime / videoRef.current.duration) * 100;
-        setProgress(progress);
-    };
-
-    const handleProgressBarClick = (event) => {
-        // Calculate the new time based on the clicked position on the progress bar
-        const newTime = (event.clientX - progressBarRef.current.offsetLeft) / progressBarRef.current.offsetWidth;
-        videoRef.current.currentTime = newTime * videoRef.current.duration;
-    };
-
-    const handleProgressBarMouseDown = () => {
-        setIsDragging(true);
-    };
-
-    const handleDocumentMouseMove = (event) => {
-        if (!isDragging) {
-            return;
-        }
-
-        // Calculate the new time based on the current mouse position
-        const newTime = (event.clientX - progressBarRef.current.offsetLeft) / progressBarRef.current.offset
-    }
-
     //stellt sicher, dass canvas in der richtigen groesse geladen wird nachdem video fertig geladen ist
     useEffect(() => {
         const video = videoRef.current;
@@ -95,20 +70,43 @@ const MyComponent = () => {
         });
     }, [videoRef, canvasRef]);
 
+    const handleTimeUpdate = () => {
+        setProgress((videoRef.current.currentTime / videoRef.current.duration) * 100);
+    };
 
+    const handleProgressBarClick = (e) => {
+        const percent = (e.clientX - progressBarRef.current.offsetLeft) / progressBarRef.current.offsetWidth;
+        videoRef.current.currentTime = percent * videoRef.current.duration;
+    };
+
+    const handleProgressBarMouseDown = () => {
+        setIsDragging(true);
+    };
+
+    const handleProgressBarMouseUp = () => {
+        setIsDragging(false);
+    };
+
+    const handleProgressBarMouseMove = (e) => {
+        if (!isDragging) {
+            return;
+        }
+        const percent = (e.clientX - progressBarRef.current.offsetLeft) / progressBarRef.current.offsetWidth;
+        videoRef.current.currentTime = percent * videoRef.current.duration;
+    };
 
     return (
         <div
             ref={wrapperRef}
             className="wrapper"
-            style={{ width: "60%", height: "56.25%", float: "left" }}
+            style={{width: "60%", height: "56.25%", float: "left", position: "relative"}}
         >
             {!fileSelected && (
                 <input
                     ref={fileInputRef}
                     type="file"
                     accept="video/*"
-                    style={{ zIndex: 2 }}
+                    style={{zIndex: 2}}
                     onChange={handleFileSelect}
                 />
             )}
@@ -134,15 +132,29 @@ const MyComponent = () => {
                 onTimeUpdate={handleTimeUpdate}
             />
 
-            <div
-                ref={progressBarRef}
-                className="progress-bar"
-                style={{ width: `${progress}%`, height: "10px", backgroundColor: "blue" }}
-                onClick={handleProgressBarClick}
-                onMouseDown={handleProgressBarMouseDown}
-
-            />
-            <div className="edit_video" style={{ display: fileSelected ? "block" : "none" }}>                {!isPlaying && (
+            <div className="edit_video"
+                 style={{
+                     display: fileSelected ? "block" : "none", padding: "20px"
+                 }}>
+                <div
+                    ref={progressBarRef}
+                    className="progress-bar"
+                    style={{
+                        width: `${progress}%`,
+                        height: "10px",
+                        backgroundColor: "#444444",
+                        position: "relative",
+                        bottom: "10px",
+                        left: 0,
+                        cursor: "pointer",
+                    }}
+                    onMouseDown={handleProgressBarMouseDown}
+                    onMouseMove={handleProgressBarMouseMove}
+                    onMouseUp={handleProgressBarMouseUp}
+                    onMouseLeave={handleProgressBarMouseUp}
+                    onClick={handleProgressBarClick}
+                />
+                {!isPlaying && (
                     <button onClick={handlePlayClick}>Play</button>
                 )}
                 {isPlaying && (
