@@ -4,6 +4,7 @@ let videoWidth;
 let videoHeight;
 
 const MyComponent = () => {
+    const wrapperRef = useRef(null);
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
     const fileInputRef = useRef(null);
@@ -74,27 +75,63 @@ const MyComponent = () => {
         const newTime = (event.clientX - progressBarRef.current.offsetLeft) / progressBarRef.current.offset
     }
 
+    //stellt sicher, dass canvas in der richtigen groesse geladen wird nachdem video fertig geladen ist
+    useEffect(() => {
+        const video = videoRef.current;
+        const canvas = canvasRef.current;
+        if (!video || !canvas) {
+            return;
+        }
+
+        // Set the width and height of the canvas to the offsetWidth and offsetHeight of the video
+        canvas.width = video.offsetWidth;
+        canvas.height = video.offsetHeight;
+
+        // Add an event listener for the 'loadedmetadata' event of the video
+        video.addEventListener("loadedmetadata", () => {
+            // Set the width and height of the canvas to the offsetWidth and offsetHeight of the video
+            canvas.width = video.offsetWidth;
+            canvas.height = video.offsetHeight;
+        });
+    }, [videoRef, canvasRef]);
+
+
 
     return (
-        <div className="wrapper">
+        <div
+            ref={wrapperRef}
+            className="wrapper"
+            style={{ width: "60%", height: "56.25%", float: "left" }}
+        >
             {!fileSelected && (
                 <input
                     ref={fileInputRef}
                     type="file"
                     accept="video/*"
-                    style={{ zIndex: 2}}
+                    style={{ zIndex: 2 }}
                     onChange={handleFileSelect}
                 />
-
             )}
-            <video ref={videoRef} /*controls*/ style={{ flex: 1, display: fileSelected ? "block" : "none" }}
-            onTimeUpdate={handleTimeUpdate}
-            />
             <canvas
                 ref={canvasRef}
-                width={videoWidth}
-                height={videoHeight}
-                style={{ zIndex: 1, position: "absolute", width: "100%" }}
+                width={videoRef.current ? videoRef.current.offsetWidth : 0}
+                height={videoRef.current ? videoRef.current.offsetHeight : 0}
+                style={{
+                    zIndex: 2,
+                    position: "absolute",
+                    display: fileSelected ? "block" : "none",
+                }}
+            />
+            <video
+                ref={videoRef}
+                /*controls*/
+                style={{
+                    width: "100%",
+                    height: "100%",
+                    zIndex: 1,
+                    display: fileSelected ? "block" : "none",
+                }}
+                onTimeUpdate={handleTimeUpdate}
             />
 
             <div
