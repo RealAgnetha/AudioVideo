@@ -99,9 +99,17 @@ const MyComponent = () => {
         e.preventDefault();
         const img = new Image();
         img.src = e.dataTransfer.getData('text/plain');
-        img.style.top = `${e.clientY}px`;
-        img.style.left = `${e.clientX}px`;
-        canvasRef.current.appendChild(img);
+
+        // Get the position of the canvas element
+        const canvasRect = canvasRef.current.getBoundingClientRect();
+
+        // Calculate the position on the canvas where the image should be inserted
+        const x = e.clientX - canvasRect.left;
+        const y = e.clientY - canvasRect.top;
+
+        // Insert the image at the calculated position
+        const context = canvasRef.current.getContext('2d');
+        context.drawImage(img, x, y);
     };
 
 
