@@ -1,5 +1,5 @@
 import React from 'react';
-import './css/meme_data.css';
+import './css/styles.css';
 
 class Meme_Data extends React.Component {
     handleDrag = (e) => {

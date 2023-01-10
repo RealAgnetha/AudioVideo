@@ -15,6 +15,19 @@ body {
     float: left;
 }
 
+.wrapperForMemes {
+    width: 30%;
+    max-width: 30%;
+    float: right;
+    display: flex;
+    flex-direction: column;
+}
+
+.equal-size {
+    width: 150px;
+    height: 150px;
+}
+
 
 /**The following are premade and i didnt modify them or use them yet*/
 .toggle {

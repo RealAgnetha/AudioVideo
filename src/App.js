@@ -1,4 +1,4 @@
-import Meme_Data from "./video_Editor/Meme_Data";
+import Meme_Data from "./Meme_Data";
 import {MyComponent} from "./MyComponent.js";
 
 function App() {
