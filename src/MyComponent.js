@@ -140,15 +140,23 @@ const MyComponent = () => {
             className="wrapper"
             style={{width: "60%", height: "56.25%", float: "left", position: "relative"}}
         >
+            <div className="file_select"
+            style={{padding: "50px"}}>
             {!fileSelected && (
-                <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="video/*"
-                    style={{zIndex: 2}}
-                    onChange={handleFileSelect}
-                />
+                <label style={{padding: "10px"}}>Upload your video: </label>
             )}
+            {fileSelected && (
+                <label style={{padding: "10px"}}>Upload new video: </label>
+            )}
+
+            <input
+                ref={fileInputRef}
+                type="file"
+                accept="video/*"
+                style={{zIndex: 2}}
+                onChange={handleFileSelect}
+            />
+        </div>
             <canvas
                 ref={canvasRef}
                 onDrop={handleDrop}
@@ -196,6 +204,7 @@ const MyComponent = () => {
                     onMouseLeave={handleProgressBarMouseUp}
                     onClick={handleProgressBarClick}
                 />
+
                 {!isPlaying && (
                     <button onClick={handlePlayClick}>Play</button>
                 )}
@@ -203,6 +212,7 @@ const MyComponent = () => {
                     <button onClick={handlePauseClick}>Pause</button>
                 )}
             </div>
+
         </div>
     );
 
