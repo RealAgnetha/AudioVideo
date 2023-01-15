@@ -1,8 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react';
 
-let videoWidth;
-let videoHeight;
-
 const MyComponent = () => {
     const wrapperRef = useRef(null);
     const videoRef = useRef(null);
@@ -14,21 +11,55 @@ const MyComponent = () => {
     const [progress, setProgress] = useState(0); // current progress of the video, in percent
     const [isDragging, setIsDragging] = useState(false); // flag to indicate if progress bar is being dragged
 
+    const [img, setImg] = useState(null);
+    const [x, setX] = useState(0);
+    const [y, setY] = useState(0);
+    const [width, setWidth] = useState(0);
+    const [height, setHeight] = useState(0);
+
+    let intervalId;
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        const img = document.createElement('img');
+        img.src = e.dataTransfer.getData('text/plain');
+
+        // Get the position of the canvas element
+        const canvasRect = canvasRef.current.getBoundingClientRect();
+
+        // Calculate the position on the canvas where the image should be inserted
+        const x = e.clientX - canvasRect.left;
+        const y = e.clientY - canvasRect.top;
+        const width = img.width;
+        const height = img.height;
+
+        setImg(img);
+        setX(x);
+        setY(y);
+        setWidth(width);
+        setHeight(height);
+
+    }
 
     useEffect(() => {
-        const video = videoRef.current;
-        video.style.width = `${video.offsetWidth}px` * 2;
-        video.style.height = `${video.offsetHeight}px` * 2;
-
-        const canvas = canvasRef.current;
-        const context = canvas.getContext('2d');
-
-        const drawFrame = () => {
-            context.drawImage(video, 0, 0, videoWidth, videoHeight);
-            requestAnimationFrame(drawFrame);
+        if (!img) {
+            return;
         }
-        drawFrame();
-    }, []);
+        // clear the interval when component unmount or component update.
+        return () => clearInterval(intervalId);
+    }, [img]);
+
+    useEffect(() => {
+        if (!img) {
+            return;
+        }
+        // Set interval for the gif
+        intervalId = setInterval(() => {
+            const canvas = canvasRef.current;
+            const context = canvas.getContext('2d');
+            context.drawImage(img, x, y, width, height);
+        }, 50);
+    }, [img, x, y, width, height]);
 
     const handleFileSelect = () => {
         const file = fileInputRef.current.files[0];
@@ -94,24 +125,6 @@ const MyComponent = () => {
         const percent = (e.clientX - progressBarRef.current.offsetLeft) / progressBarRef.current.offsetWidth;
         videoRef.current.currentTime = percent * videoRef.current.duration;
     };
-
-    const handleDrop = (e) => {
-        e.preventDefault();
-        const img = new Image();
-        img.src = e.dataTransfer.getData('text/plain');
-
-        // Get the position of the canvas element
-        const canvasRect = canvasRef.current.getBoundingClientRect();
-
-        // Calculate the position on the canvas where the image should be inserted
-        const x = e.clientX - canvasRect.left;
-        const y = e.clientY - canvasRect.top;
-
-        // Insert the image at the calculated position
-        const context = canvasRef.current.getContext('2d');
-        context.drawImage(img, x, y);
-    };
-
 
     const handleDragOver = (e) => {
         e.preventDefault();
@@ -189,7 +202,6 @@ const MyComponent = () => {
                 {isPlaying && (
                     <button onClick={handlePauseClick}>Pause</button>
                 )}
-
             </div>
         </div>
     );
