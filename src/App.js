@@ -1,13 +1,13 @@
-import Meme_Data from "./Meme_Data";
-import {MyComponent} from "./MyComponent.js";
-import {Test} from "./Test.js";
+import MemeData from "./components/MemeData";
+import {MyComponent} from "./components/MyComponent.js";
+//import {Test} from "./Test.js";
 
 
 function App() {
     return (
         <div className="App">
             <MyComponent/>
-            <Meme_Data/>
+            <MemeData/>
         </div>
     );
 }

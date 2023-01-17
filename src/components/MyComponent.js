@@ -19,27 +19,27 @@ const MyComponent = () => {
 
     let intervalId;
 
-    const handleDrop = (e) => {
-        e.preventDefault();
-        const img = document.createElement('img');
-        img.src = e.dataTransfer.getData('text/plain');
-
-        // Get the position of the canvas element
-        const canvasRect = canvasRef.current.getBoundingClientRect();
-
-        // Calculate the position on the canvas where the image should be inserted
-        const x = e.clientX - canvasRect.left;
-        const y = e.clientY - canvasRect.top;
-        const width = img.width;
-        const height = img.height;
-
-        setImg(img);
-        setX(x);
-        setY(y);
-        setWidth(width);
-        setHeight(height);
-
-    }
+    // const handleDrop = (e) => {
+    //     e.preventDefault();
+    //     const img = document.createElement('img');
+    //     img.src = e.dataTransfer.getData('text/plain');
+    //
+    //     // Get the position of the canvas element
+    //     const canvasRect = canvasRef.current.getBoundingClientRect();
+    //
+    //     // Calculate the position on the canvas where the image should be inserted
+    //     const x = e.clientX - canvasRect.left;
+    //     const y = e.clientY - canvasRect.top;
+    //     const width = img.width;
+    //     const height = img.height;
+    //
+    //     setImg(img);
+    //     setX(x);
+    //     setY(y);
+    //     setWidth(width);
+    //     setHeight(height);
+    //
+    // }
 
     useEffect(() => {
         if (!img) {
@@ -159,9 +159,9 @@ const MyComponent = () => {
         </div>
             <canvas
                 ref={canvasRef}
-                onDrop={handleDrop}
-                onDragOver={handleDragOver}
-                onDragStart={handleDragStart}
+                // onDrop={handleDrop}
+                // onDragOver={handleDragOver}
+                // onDragStart={handleDragStart}
                 width={videoRef.current ? videoRef.current.offsetWidth : 0}
                 height={videoRef.current ? videoRef.current.offsetHeight : 0}
                 style={{
