@@ -141,7 +141,7 @@ const MyComponent = () => {
     return (
         <div
             ref={wrapperRef}
-            className="wrapper"
+            className="wrapper-video"
         >
             <div className="file_select">
                 {!fileSelected && (
