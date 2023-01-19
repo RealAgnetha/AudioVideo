@@ -149,8 +149,6 @@ body {
     display: none;
 }
 
-/*<div className={`testing-h1 ${fileSelected ? 'file-selected': 'file-not-selected'} bg-color`}><h1>HALLO TEST</h1></div>
-*/
 .canvas-style {
     z-index: 2;
     position: absolute;
@@ -164,4 +162,17 @@ body {
 
 .edit_video {
     padding-top: 20px;
+}
+
+.progress-bar-style {
+    height: 10px;
+    background-color: #444444;
+    position: relative;
+    bottom: 10px;
+    left: 0;
+    cursor: pointer;
+}
+
+label {
+    padding: 100px;
 }

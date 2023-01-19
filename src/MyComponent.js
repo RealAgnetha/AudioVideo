@@ -17,6 +17,9 @@ const MyComponent = () => {
     const [y, setY] = useState(0);
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
+    const progressBarStyle = {
+        width: `${progress}%`,
+    };
 
     let intervalId;
 
@@ -142,10 +145,10 @@ const MyComponent = () => {
         >
             <div className="file_select">
                 {!fileSelected && (
-                    <label style={{padding: "10px"}}>Upload your video: </label>
+                    <label>Upload your video: </label>
                 )}
                 {fileSelected && (
-                    <label style={{padding: "10px"}}>Upload new video: </label>
+                    <label>Upload new video: </label>
                 )}
 
                 <input
@@ -169,34 +172,23 @@ const MyComponent = () => {
             <video
                 ref={videoRef}
                 className={`video-style ${fileSelected ? 'file-selected' : 'file-not-selected'}`}
-
                 /*controls*/
                 onTimeUpdate={handleTimeUpdate} className="video-styles"
             />
-
             <div className="edit_video"
                  style={{
                      display: fileSelected ? "block" : "none"
                  }}>
                 <div
                     ref={progressBarRef}
-                    className="progress-bar"
-                    style={{
-                        width: `${progress}%`,
-                        height: "10px",
-                        backgroundColor: "#444444",
-                        position: "relative",
-                        bottom: "10px",
-                        left: 0,
-                        cursor: "pointer",
-                    }}
+                    className="progress-bar-style"
+                    style={progressBarStyle}
                     onMouseDown={handleProgressBarMouseDown}
                     onMouseMove={handleProgressBarMouseMove}
                     onMouseUp={handleProgressBarMouseUp}
                     onMouseLeave={handleProgressBarMouseUp}
                     onClick={handleProgressBarClick}
                 />
-
                 {!isPlaying && (
                     <button onClick={handlePlayClick}>Play</button>
                 )}
@@ -204,7 +196,6 @@ const MyComponent = () => {
                     <button onClick={handlePauseClick}>Pause</button>
                 )}
             </div>
-
         </div>
     );
 
