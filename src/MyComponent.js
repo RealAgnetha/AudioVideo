@@ -1,4 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react';
+import './css/styles.css';
 
 const MyComponent = () => {
     const wrapperRef = useRef(null);
@@ -138,53 +139,44 @@ const MyComponent = () => {
         <div
             ref={wrapperRef}
             className="wrapper"
-            style={{width: "60%", height: "56.25%", float: "left", position: "relative"}}
         >
-            <div className="file_select"
-            style={{padding: "50px"}}>
-            {!fileSelected && (
-                <label style={{padding: "10px"}}>Upload your video: </label>
-            )}
-            {fileSelected && (
-                <label style={{padding: "10px"}}>Upload new video: </label>
-            )}
+            <div className="file_select">
+                {!fileSelected && (
+                    <label style={{padding: "10px"}}>Upload your video: </label>
+                )}
+                {fileSelected && (
+                    <label style={{padding: "10px"}}>Upload new video: </label>
+                )}
 
-            <input
-                ref={fileInputRef}
-                type="file"
-                accept="video/*"
-                style={{zIndex: 2}}
-                onChange={handleFileSelect}
-            />
-        </div>
+                <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="video/*"
+                    style={{zIndex: 2}}
+                    onChange={handleFileSelect}
+                />
+            </div>
             <canvas
                 ref={canvasRef}
+                className={`canvas-style ${fileSelected ? 'file-selected' : 'file-not-selected'}`}
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
                 onDragStart={handleDragStart}
                 width={videoRef.current ? videoRef.current.offsetWidth : 0}
                 height={videoRef.current ? videoRef.current.offsetHeight : 0}
-                style={{
-                    zIndex: 2,
-                    position: "absolute",
-                    display: fileSelected ? "block" : "none",
-                }}
+
             />
             <video
                 ref={videoRef}
+                className={`video-style ${fileSelected ? 'file-selected' : 'file-not-selected'}`}
+
                 /*controls*/
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    zIndex: 1,
-                    display: fileSelected ? "block" : "none",
-                }}
-                onTimeUpdate={handleTimeUpdate}
+                onTimeUpdate={handleTimeUpdate} className="video-styles"
             />
 
             <div className="edit_video"
                  style={{
-                     display: fileSelected ? "block" : "none", padding: "20px"
+                     display: fileSelected ? "block" : "none"
                  }}>
                 <div
                     ref={progressBarRef}
