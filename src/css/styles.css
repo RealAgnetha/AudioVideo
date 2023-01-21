@@ -28,6 +28,11 @@ body {
     align-items: flex-start;
 }
 
+label {
+    font-family: 'Font', serif;
+    color: #FF8FD1FF;
+}
+
 .header-container {
     width: 100%;
     flex: 0 0 80px;
@@ -50,7 +55,6 @@ body {
 .right-side {
     grid-column: 2 / 3; /* spans the second column */
 }
-
 
 .video {
     width: 100%;
@@ -84,7 +88,15 @@ body {
 ::-webkit-scrollbar-thumb {
     background-color: #ffebf7;
     -webkit-border-radius: 100px;
+}
 
+button {
+    background-color: #ffb9e4;
+    border-color: white;
+    color: white;
+}
+input[type="file"] {
+    color: #ffb9e4;
 }
 
 .equal-size {
@@ -100,7 +112,8 @@ body {
 }
 
 .file-select {
-    margin-top: 250px;
+    position: absolute;
+    margin-top: 50px;
 }
 
 .file-selected {
@@ -129,7 +142,7 @@ body {
 
 .progress-bar-style {
     height: 10px;
-    background-color: #444444;
+    background-color: #ffb9e4;
     position: relative;
     bottom: 10px;
     left: 0;
@@ -142,7 +155,7 @@ img {
 
 /*sry das hier ist voll reingehackt weil die proper lösung sehr friemelig war vllt mach ich das noch gescheit*/
 .img2 {
-    padding-top: 550px;
+    padding-top: 1500px;
 }
 
 

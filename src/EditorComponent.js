@@ -140,12 +140,10 @@ const EditorComponent = () => {
 
     return (
         <div className="left-side">
-
             <div
                 ref={wrapperRef}
                 className="wrapper-video"
             >
-
                 <canvas
                     ref={canvasRef}
                     className={`canvas-style ${fileSelected ? 'file-selected' : 'file-not-selected'}`}
@@ -185,7 +183,7 @@ const EditorComponent = () => {
                 </div>
 
             </div>
-            <div className="file_select">
+            <div className="file-select">
                 {!fileSelected && (
                     <label>Upload your video: </label>
                 )}
