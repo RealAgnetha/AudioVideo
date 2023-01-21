@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import './css/styles.css';
 
-const MyComponent = () => {
+const EditorComponent = () => {
     const wrapperRef = useRef(null);
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
@@ -140,22 +140,7 @@ const MyComponent = () => {
 
     return (
         <div className="left-side">
-            <div className="file_select">
-                {!fileSelected && (
-                    <label>Upload your video: </label>
-                )}
-                {fileSelected && (
-                    <label>Upload new video: </label>
-                )}
 
-                <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="video/*"
-                    style={{zIndex: 2}}
-                    onChange={handleFileSelect}
-                />
-            </div>
             <div
                 ref={wrapperRef}
                 className="wrapper-video"
@@ -198,10 +183,27 @@ const MyComponent = () => {
                         <button onClick={handlePauseClick}>Pause</button>
                     )}
                 </div>
+
+            </div>
+            <div className="file_select">
+                {!fileSelected && (
+                    <label>Upload your video: </label>
+                )}
+                {fileSelected && (
+                    <label>Upload new video: </label>
+                )}
+
+                <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="video/*"
+                    style={{zIndex: 2}}
+                    onChange={handleFileSelect}
+                />
             </div>
         </div>
     );
 
 };
 
-export {MyComponent};
+export {EditorComponent};

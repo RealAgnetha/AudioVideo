@@ -1,13 +1,16 @@
-import Meme_Data from "./Meme_Data";
-import {MyComponent} from "./MyComponent.js";
+import MemesComponent from "./MemesComponent";
+import {EditorComponent} from "./EditorComponent.js";
+import Header from './Header';
 import './css/styles.css';
-
 
 function App() {
     return (
         <div className="App">
-            <MyComponent/>
-            <Meme_Data/>
+            <Header />
+            <div className="grid-container">
+                <EditorComponent/>
+                <MemesComponent/>
+            </div>
         </div>
     );
 }

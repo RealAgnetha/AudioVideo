@@ -1,25 +1,56 @@
+@font-face {
+    font-family: 'Font';
+    src: url('../../fonts/Purple Smile.ttf') format('truetype');
+}
+
+h1 {
+    font-family: 'Font', serif;
+    font-style: italic;
+    align-self: center;
+    text-align: center;
+    color: #ff8fd1;
+
+}
+
 body {
     padding-top: 50px;
     transition: background-color .3s ease, color .3s ease;
+    background-color: mintcream;
+    padding-bottom: 100px;
+
 }
 
-.App {
-    display: flex;
+.grid-container {
+    margin-left: 50px;
+    margin-right: 50px;
+    display: grid;
+    grid-template-columns: 70% 30%; /* 70% for left-side, 30% for right-side */
     align-items: flex-start;
 }
 
-.left-side {
-    width: 70%;
-    padding: 20px;
-}
-
-.right-side {
-    margin: auto;
+.header-container {
+    width: 100%;
+    flex: 0 0 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
 }
+
+.header-container h1 {
+    font-size: 5rem;
+    margin: 0;
+    color: #ffb9e4;
+}
+
+
+.left-side {
+    grid-column: 1 / 2; /* spans the first column */
+}
+
+.right-side {
+    grid-column: 2 / 3; /* spans the second column */
+}
+
 
 .video {
     width: 100%;
@@ -37,13 +68,23 @@ body {
 .wrapper-memes {
     display: flex;
     flex-direction: column;
-    border: 2px solid #ccc; /* Add a solid border */
-    border-radius: 10px; /* Add rounded corners */
-    padding: 50px; /* Add padding */
+    border: 4px solid #ffb9e4;
+    border-radius: 10px; /*  rounded corners */
+    padding: 50px;
     align-items: center;
     justify-content: center;
     overflow-y: scroll;
     max-height: 500px;
+    background-color: #fbfffd;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #ffebf7;
+    -webkit-border-radius: 100px;
+
 }
 
 .equal-size {
@@ -52,14 +93,14 @@ body {
 }
 
 .wrapper-video {
-    width: 100%;
+    padding-top: 100px;
+    width: 95%;
     float: left;
     position: relative;
-    padding: 20px;
 }
 
 .file-select {
-    padding: 50px;
+    margin-top: 250px;
 }
 
 .file-selected {
@@ -95,17 +136,13 @@ body {
     cursor: pointer;
 }
 
-label {
+img {
     padding: 20px;
 }
 
-img {
-    padding: 20px
-}
-
-h1 {
-    font-family: cursive;
-    font-style: italic;
+/*sry das hier ist voll reingehackt weil die proper lösung sehr friemelig war vllt mach ich das noch gescheit*/
+.img2 {
+    padding-top: 550px;
 }
 
 
@@ -129,14 +166,12 @@ h1 {
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-
 }
 
 .toggle:hover {
     transition: background-color .2s ease;
     background-color: rgb(146, 146, 146);
 }
-
 
 .playback {
     position: relative;
@@ -197,15 +232,4 @@ h1 {
     bottom: 0;
     cursor: pointer;
     pointer-events: none;
-}
-
-.warning {
-    padding: 0.8em;
-    color: #da7f00;
-    background-color: #ffecd1;
-    border-radius: 0.3em;
-    border: 0.1em solid #f0ad4e;
-    margin: 1em;
-    justify-content: center;
-    text-align: center;
 }
