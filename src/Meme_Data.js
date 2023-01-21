@@ -8,7 +8,7 @@ class Meme_Data extends React.Component {
 
     render = () => {
         return (
-            <div>
+            <div className="right-side">
                 <h1>Memes</h1>
                 <div className="wrapper-memes">
 

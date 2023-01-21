@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './css/styles.css';
 
 const MyComponent = () => {
@@ -139,10 +139,7 @@ const MyComponent = () => {
     }
 
     return (
-        <div
-            ref={wrapperRef}
-            className="wrapper-video"
-        >
+        <div className="left-side">
             <div className="file_select">
                 {!fileSelected && (
                     <label>Upload your video: </label>
@@ -159,42 +156,48 @@ const MyComponent = () => {
                     onChange={handleFileSelect}
                 />
             </div>
-            <canvas
-                ref={canvasRef}
-                className={`canvas-style ${fileSelected ? 'file-selected' : 'file-not-selected'}`}
-                onDrop={handleDrop}
-                onDragOver={handleDragOver}
-                onDragStart={handleDragStart}
-                width={videoRef.current ? videoRef.current.offsetWidth : 0}
-                height={videoRef.current ? videoRef.current.offsetHeight : 0}
+            <div
+                ref={wrapperRef}
+                className="wrapper-video"
+            >
 
-            />
-            <video
-                ref={videoRef}
-                className={`video-style ${fileSelected ? 'file-selected' : 'file-not-selected'}`}
-                /*controls*/
-                onTimeUpdate={handleTimeUpdate} className="video-styles"
-            />
-            <div className="edit_video"
-                 style={{
-                     display: fileSelected ? "block" : "none"
-                 }}>
-                <div
-                    ref={progressBarRef}
-                    className="progress-bar-style"
-                    style={progressBarStyle}
-                    onMouseDown={handleProgressBarMouseDown}
-                    onMouseMove={handleProgressBarMouseMove}
-                    onMouseUp={handleProgressBarMouseUp}
-                    onMouseLeave={handleProgressBarMouseUp}
-                    onClick={handleProgressBarClick}
+                <canvas
+                    ref={canvasRef}
+                    className={`canvas-style ${fileSelected ? 'file-selected' : 'file-not-selected'}`}
+                    onDrop={handleDrop}
+                    onDragOver={handleDragOver}
+                    onDragStart={handleDragStart}
+                    width={videoRef.current ? videoRef.current.offsetWidth : 0}
+                    height={videoRef.current ? videoRef.current.offsetHeight : 0}
+
                 />
-                {!isPlaying && (
-                    <button onClick={handlePlayClick}>Play</button>
-                )}
-                {isPlaying && (
-                    <button onClick={handlePauseClick}>Pause</button>
-                )}
+                <video
+                    ref={videoRef}
+                    className={`video-style ${fileSelected ? 'file-selected' : 'file-not-selected'}`}
+                    /*controls*/
+                    onTimeUpdate={handleTimeUpdate} className="video-styles"
+                />
+                <div className="edit_video"
+                     style={{
+                         display: fileSelected ? "block" : "none"
+                     }}>
+                    <div
+                        ref={progressBarRef}
+                        className="progress-bar-style"
+                        style={progressBarStyle}
+                        onMouseDown={handleProgressBarMouseDown}
+                        onMouseMove={handleProgressBarMouseMove}
+                        onMouseUp={handleProgressBarMouseUp}
+                        onMouseLeave={handleProgressBarMouseUp}
+                        onClick={handleProgressBarClick}
+                    />
+                    {!isPlaying && (
+                        <button onClick={handlePlayClick}>Play</button>
+                    )}
+                    {isPlaying && (
+                        <button onClick={handlePauseClick}>Pause</button>
+                    )}
+                </div>
             </div>
         </div>
     );

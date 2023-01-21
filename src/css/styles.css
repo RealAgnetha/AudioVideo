@@ -1,5 +1,24 @@
 body {
+    padding-top: 50px;
     transition: background-color .3s ease, color .3s ease;
+}
+
+.App {
+    display: flex;
+    align-items: flex-start;
+}
+
+.left-side {
+    width: 70%;
+    padding: 20px;
+}
+
+.right-side {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .video {
@@ -16,9 +35,6 @@ body {
 }
 
 .wrapper-memes {
-    width: 30%;
-    max-width: 30%;
-    float: right;
     display: flex;
     flex-direction: column;
     border: 2px solid #ccc; /* Add a solid border */
@@ -30,17 +46,16 @@ body {
     max-height: 500px;
 }
 
-
 .equal-size {
     width: 150px;
     height: 150px;
 }
 
 .wrapper-video {
-    width: 60%;
-    height: 56.25%;
+    width: 100%;
     float: left;
     position: relative;
+    padding: 20px;
 }
 
 .file-select {
@@ -56,6 +71,7 @@ body {
 }
 
 .canvas-style {
+    width: 100%;
     z-index: 2;
     position: absolute;
 }
@@ -80,13 +96,17 @@ body {
 }
 
 label {
-    padding: 100px;
+    padding: 20px;
 }
 
 img {
     padding: 20px
 }
 
+h1 {
+    font-family: cursive;
+    font-style: italic;
+}
 
 
 /**The following are premade and i didnt modify them or use them yet*/
