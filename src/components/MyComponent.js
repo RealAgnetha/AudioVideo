@@ -1,13 +1,13 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, {useRef, useEffect, useState, useCallback} from 'react';
 
-const MyComponent = () => {
+const MyComponent = React.memo(({ isPlaying, setIsPlaying }) => {
     const wrapperRef = useRef(null);
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
     const fileInputRef = useRef(null);
     const progressBarRef = useRef(null);
     const [fileSelected, setFileSelected] = useState(false) //when file has been selected, change state
-    const [isPlaying, setIsPlaying] = useState(false); // state for play/pause button
+    // const [isPlaying, setIsPlaying] = useState(false); // state for play/pause button
     const [progress, setProgress] = useState(0); // current progress of the video, in percent
     const [isDragging, setIsDragging] = useState(false); // flag to indicate if progress bar is being dragged
 
@@ -36,10 +36,11 @@ const MyComponent = () => {
     //     setImg(img);
     //     setX(x);
     //     setY(y);
-    //     setWidth(width);
+    //     setWidth(width);fse
     //     setHeight(height);
     //
     // }
+
 
     useEffect(() => {
         if (!img) {
@@ -69,17 +70,35 @@ const MyComponent = () => {
         setFileSelected(true);
     };
 
-    const handlePlayClick = () => {
-        // When the play button is clicked, play the video and update the state
-        videoRef.current.play();
-        setIsPlaying(true);
-    };
+    // const handlePlayClick = () => {
+    //     // When the play button is clicked, play the video and update the state
+    //     videoRef.current.play();
+    //     setIsPlaying(true);
+    // };
+    //
+    //
+    // const handlePauseClick = () => {
+    //     // When the pause button is clicked, pause the video and update the state
+    //     videoRef.current.pause();
+    //     setIsPlaying(false);
+    // };
 
-    const handlePauseClick = () => {
-        // When the pause button is clicked, pause the video and update the state
-        videoRef.current.pause();
-        setIsPlaying(false);
-    };
+    // const handleClick = () => {
+    //     videoRef.current.play();
+    // };
+
+    const handleClick = useCallback(() => {
+        if (!isPlaying){
+            videoRef.current.play();
+
+        }
+        else if (isPlaying) {
+            videoRef.current.pause();
+        }
+        setIsPlaying(prevState => !prevState);
+    });
+
+    // const handleClick = useCallback(() => setIsPlaying(prevState => !prevState),[setIsPlaying]);
 
     //stellt sicher, dass canvas in der richtigen groesse geladen wird nachdem video fertig geladen ist
     useEffect(() => {
@@ -105,34 +124,34 @@ const MyComponent = () => {
         setProgress((videoRef.current.currentTime / videoRef.current.duration) * 100);
     };
 
-    const handleProgressBarClick = (e) => {
-        const percent = (e.clientX - progressBarRef.current.offsetLeft) / progressBarRef.current.offsetWidth;
-        videoRef.current.currentTime = percent * videoRef.current.duration;
-    };
+    // const handleProgressBarClick = (e) => {
+    //     const percent = (e.clientX - progressBarRef.current.offsetLeft) / progressBarRef.current.offsetWidth;
+    //     videoRef.current.currentTime = percent * videoRef.current.duration;
+    // };
+    //
+    // const handleProgressBarMouseDown = () => {
+    //     setIsDragging(true);
+    // };
+    //
+    // const handleProgressBarMouseUp = () => {
+    //     setIsDragging(false);
+    // };
+    //
+    // const handleProgressBarMouseMove = (e) => {
+    //     if (!isDragging) {
+    //         return;
+    //     }
+    //     const percent = (e.clientX - progressBarRef.current.offsetLeft) / progressBarRef.current.offsetWidth;
+    //     videoRef.current.currentTime = percent * videoRef.current.duration;
+    // };
 
-    const handleProgressBarMouseDown = () => {
-        setIsDragging(true);
-    };
-
-    const handleProgressBarMouseUp = () => {
-        setIsDragging(false);
-    };
-
-    const handleProgressBarMouseMove = (e) => {
-        if (!isDragging) {
-            return;
-        }
-        const percent = (e.clientX - progressBarRef.current.offsetLeft) / progressBarRef.current.offsetWidth;
-        videoRef.current.currentTime = percent * videoRef.current.duration;
-    };
-
-    const handleDragOver = (e) => {
-        e.preventDefault();
-    };
-
-    const handleDragStart = (e) => {
-        e.dataTransfer.setData('text/plain', e.target.src);
-    }
+    // const handleDragOver = (e) => {
+    //     e.preventDefault();
+    // };
+    //
+    // const handleDragStart = (e) => {
+    //     e.dataTransfer.setData('text/plain', e.target.src);
+    // }
 
     return (
         <div
@@ -140,23 +159,7 @@ const MyComponent = () => {
             className="wrapper"
             style={{width: "60%", height: "56.25%", float: "left", position: "relative"}}
         >
-            <div className="file_select"
-            style={{padding: "50px"}}>
-            {!fileSelected && (
-                <label style={{padding: "10px"}}>Upload your video: </label>
-            )}
-            {fileSelected && (
-                <label style={{padding: "10px"}}>Upload new video: </label>
-            )}
 
-            <input
-                ref={fileInputRef}
-                type="file"
-                accept="video/*"
-                style={{zIndex: 2}}
-                onChange={handleFileSelect}
-            />
-        </div>
             <canvas
                 ref={canvasRef}
                 // onDrop={handleDrop}
@@ -182,40 +185,59 @@ const MyComponent = () => {
                 onTimeUpdate={handleTimeUpdate}
             />
 
+            <div className="file_select"
+                 style={{padding: "10px"}}>
+                {!fileSelected && (
+                    <label style={{padding: "10px"}}>Upload your video: </label>
+                )}
+                {fileSelected && (
+                    <label style={{padding: "10px"}}>Upload new video: </label>
+                )}
+
+                <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="video/*"
+                    style={{zIndex: 2}}
+                    onChange={handleFileSelect}
+                />
+            </div>
+
             <div className="edit_video"
                  style={{
                      display: fileSelected ? "block" : "none", padding: "20px"
                  }}>
-                <div
-                    ref={progressBarRef}
-                    className="progress-bar"
-                    style={{
-                        width: `${progress}%`,
-                        height: "10px",
-                        backgroundColor: "#444444",
-                        position: "relative",
-                        bottom: "10px",
-                        left: 0,
-                        cursor: "pointer",
-                    }}
-                    onMouseDown={handleProgressBarMouseDown}
-                    onMouseMove={handleProgressBarMouseMove}
-                    onMouseUp={handleProgressBarMouseUp}
-                    onMouseLeave={handleProgressBarMouseUp}
-                    onClick={handleProgressBarClick}
-                />
+                {/*<div*/}
+                {/*    ref={progressBarRef}*/}
+                {/*    className="progress-bar"*/}
+                {/*    style={{*/}
+                {/*        width: `${progress}%`,*/}
+                {/*        height: "10px",*/}
+                {/*        backgroundColor: "#444444",*/}
+                {/*        position: "relative",*/}
+                {/*        bottom: "10px",*/}
+                {/*        left: 0,*/}
+                {/*        cursor: "pointer",*/}
+                {/*    }}*/}
+                {/*    onMouseDown={handleProgressBarMouseDown}*/}
+                {/*    onMouseMove={handleProgressBarMouseMove}*/}
+                {/*    onMouseUp={handleProgressBarMouseUp}*/}
+                {/*    onMouseLeave={handleProgressBarMouseUp}*/}
+                {/*    onClick={handleProgressBarClick}*/}
+                {/*/>*/}
 
                 {!isPlaying && (
-                    <button onClick={handlePlayClick}>Play</button>
+                    <button onClick={handleClick}>Play</button>
                 )}
                 {isPlaying && (
-                    <button onClick={handlePauseClick}>Pause</button>
+                    <button onClick={handleClick}>Pause</button>
                 )}
+
             </div>
 
         </div>
     );
 
-};
+});
 
 export {MyComponent};
