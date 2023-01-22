@@ -1,5 +1,69 @@
+@font-face {
+    font-family: 'Font';
+    src: url('../../fonts/Purple Smile.ttf') format('truetype');
+}
+
+h1 {
+    font-family: 'Font', serif;
+    font-style: italic;
+    align-self: center;
+    text-align: center;
+    color: #ff8fd1;
+
+}
+
 body {
+    padding-top: 50px;
     transition: background-color .3s ease, color .3s ease;
+    background-color: mintcream;
+    padding-bottom: 100px;
+
+}
+
+.grid-container {
+    margin-left: 50px;
+    margin-right: 50px;
+    display: grid;
+    grid-template-columns: 70% 30%; /* 70% for left-side, 30% for right-side */
+    align-items: flex-start;
+}
+
+label {
+    font-family: 'Font', serif;
+    color: #FF8FD1FF;
+}
+
+.header-container {
+    width: 100%;
+    flex: 0 0 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-container h1 {
+    font-size: 5rem;
+    margin: 0;
+    color: #ffb9e4;
+    animation: light-reflection 1s linear infinite;
+    animation-direction: alternate;
+}
+
+@keyframes light-reflection {
+    from {
+        text-shadow: 0 0 0 #451eb5;
+    }
+    to {
+        text-shadow: 3px 0 0 #6b54ad;
+    }
+}
+
+.left-side {
+    grid-column: 1 / 2; /* spans the first column */
+}
+
+.right-side {
+    grid-column: 2 / 3; /* spans the second column */
 }
 
 .video {
@@ -15,17 +79,93 @@ body {
     float: left;
 }
 
-.wrapperForMemes {
-    width: 30%;
-    max-width: 30%;
-    float: right;
+.wrapper-memes {
     display: flex;
     flex-direction: column;
+    border: 4px solid #ffb9e4;
+    border-radius: 10px; /*  rounded corners */
+    padding: 50px;
+    align-items: center;
+    justify-content: center;
+    overflow-y: scroll;
+    max-height: 500px;
+    background-color: #fbfffd;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #ffebf7;
+    -webkit-border-radius: 100px;
+}
+
+button {
+    background-color: #ffb9e4;
+    border-color: white;
+    color: white;
+}
+input[type="file"] {
+    color: #ffb9e4;
 }
 
 .equal-size {
     width: 150px;
     height: 150px;
+}
+
+.wrapper-video {
+    padding-top: 100px;
+    width: 95%;
+    float: left;
+    position: relative;
+}
+
+.file-select {
+    position: absolute;
+    margin-top: 50px;
+}
+
+.file-selected {
+    display: block;
+}
+
+.file-not-selected {
+    display: none;
+}
+
+.canvas-style {
+    width: 100%;
+    z-index: 2;
+    position: absolute;
+}
+
+.video-styles {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.edit_video {
+    padding-top: 20px;
+}
+
+.progress-bar-style {
+    height: 10px;
+    background-color: #ffb9e4;
+    position: relative;
+    bottom: 10px;
+    left: 0;
+    cursor: pointer;
+}
+
+img {
+    padding: 20px;
+}
+
+/*sry das hier ist voll reingehackt weil die proper lösung sehr friemelig war vllt mach ich das noch gescheit*/
+.img2 {
+    padding-top: 1500px;
 }
 
 
@@ -49,14 +189,12 @@ body {
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-
 }
 
 .toggle:hover {
     transition: background-color .2s ease;
     background-color: rgb(146, 146, 146);
 }
-
 
 .playback {
     position: relative;

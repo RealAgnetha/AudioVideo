@@ -1,8 +1,11 @@
-import MemeData from "./components/MemeData";
-import {MyComponent} from "./components/MyComponent.js";
-import GifPlayer from "./components/GifPlayer";
-//import {Test} from "./Test.js";
+// import MemeData from "./components/MemeData";
+// import {MyComponent} from "./components/MyComponent.js";
 import React, { useState, useCallback } from 'react';
+import MemesComponent from "./MemesComponent";
+import EditorComponent from "./EditorComponent.js";
+import GifPlayer from "./components/GifPlayer";
+import Header from './Header';
+import './css/styles.css';
 
 function App() {
 
@@ -12,8 +15,13 @@ function App() {
 
     return (
         <div className="App">
-            <MyComponent isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
-            <MemeData isPlaying={isPlaying} />
+            {/*<MyComponent isPlaying={isPlaying} setIsPlaying={setIsPlaying} />*/}
+            {/*<MemeData isPlaying={isPlaying} />*/}
+            <Header />
+            <div className="grid-container">
+                <EditorComponent isPlaying={isPlaying} setIsPlaying={setIsPlaying}/>
+                <MemesComponent isPlaying={isPlaying}/>
+            </div>
         </div>
     );
 }
