@@ -2,8 +2,8 @@
 // import {MyComponent} from "./components/MyComponent.js";
 import React, { useState, useCallback } from 'react';
 import MemesComponent from "./MemesComponent";
-import EditorComponent from "./EditorComponent.js";
-import GifPlayer from "./components/GifPlayer";
+import {EditorComponent} from "./EditorComponent.js";
+import GifPlayer from "./GifPlayer";
 import Header from './Header';
 import './css/styles.css';
 

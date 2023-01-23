@@ -1,15 +1,9 @@
 import React, {useState} from 'react';
 import '../css/styles.css';
 import Draggable from 'react-draggable';
-import {MyComponent} from "./MyComponent";
-import GifPlayer from "./GifPlayer";
+import GifPlayer from "../GifPlayer";
 
 class MemeData extends React.Component {
-
-    // handleDrag = (e) => {
-    //     e.dataTransfer.setData('text/plain', e.target.src);
-    // }
-
     render = () => {
         return (
             <div className="wrapperForMemes">
