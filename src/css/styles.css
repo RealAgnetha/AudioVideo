@@ -17,7 +17,6 @@ body {
     transition: background-color .3s ease, color .3s ease;
     background-color: mintcream;
     padding-bottom: 100px;
-
 }
 
 .grid-container {
@@ -32,6 +31,34 @@ label {
     font-family: 'Font', serif;
     color: #FF8FD1FF;
 }
+
+.timeline {
+    width: 100%; /* Set the width of the element to fill its parent container */
+    height: 40px; /* Set the height of the element */
+    background-color: #ffc5e7; /* Set a background color for the element */
+    overflow: auto; /* Set the overflow property to 'auto' to enable scrolling */
+    position: relative; /* Set the position property to 'relative' */
+}
+
+.progress-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: #ff97cf;
+}
+
+.layer {
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 40px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
 
 .header-container {
     width: 100%;
@@ -75,7 +102,7 @@ label {
 
 .edit_video {
     padding-top: 20px;
-    width: 60%;
+    width: 100%;
     float: left;
 }
 

@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
+import Layer from "./Layer";
 import './css/styles.css';
 
 const EditorComponent = () => {
@@ -6,21 +7,25 @@ const EditorComponent = () => {
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
     const fileInputRef = useRef(null);
-    const progressBarRef = useRef(null);
+    const timelineRef = useRef(null);
     const [fileSelected, setFileSelected] = useState(false) //when file has been selected, change state
     const [isPlaying, setIsPlaying] = useState(false); // state for play/pause button
     const [progress, setProgress] = useState(0); // current progress of the video, in percent
-    const [isDragging, setIsDragging] = useState(false); // flag to indicate if progress bar is being dragged
+
+
+    //const [isDragging, setIsDragging] = useState(false); // flag to indicate if progress bar is being dragged
 
     const [img, setImg] = useState(null);
     const [x, setX] = useState(0);
     const [y, setY] = useState(0);
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
-    const progressBarStyle = {
-        width: `${progress}%`,
+    const [layers, setLayers] = useState([]); // state for layers
+    const [isDragging, setIsDragging] = useState(false); // flag to indicate if progress bar is being dragged
+    const [selectedLayer, setSelectedLayer] = useState(null); // state for the selected layer
+    const timelineStyle = {
+        scrollLeft: progress,
     };
-
     let intervalId;
 
     const handleDrop = (e) => {
@@ -105,30 +110,44 @@ const EditorComponent = () => {
         });
     }, [videoRef, canvasRef]);
 
+
+    const handleAddLayer = (e) => {
+        e.preventDefault();
+        const file = e.dataTransfer.files[0];
+        console.log(file);
+        setLayers([...layers, file]);
+    }
+
+    const progressLineRef = useRef(null);
     const handleTimeUpdate = () => {
-        setProgress((videoRef.current.currentTime / videoRef.current.duration) * 100);
+        const currentTime = videoRef.current.currentTime;
+        const duration = videoRef.current.duration;
+        const progress = (currentTime / duration) * timelineRef.current.offsetWidth;
+        progressLineRef.current.style.width = `${progress}px`;
     };
 
-    const handleProgressBarClick = (e) => {
-        const percent = (e.clientX - progressBarRef.current.offsetLeft) / progressBarRef.current.offsetWidth;
-        videoRef.current.currentTime = percent * videoRef.current.duration;
+    useEffect(() => {
+        videoRef.current.addEventListener("timeupdate", handleTimeUpdate);
+        return () => {
+            videoRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+        };
+    }, []);
+
+    const handleTimelineClick = (e) => {
+        const clickPosition = e.clientX - timelineRef.current.offsetLeft;
+        const duration = videoRef.current.duration;
+        const newTime = (clickPosition / timelineRef.current.offsetWidth) * duration;
+        videoRef.current.currentTime = newTime;
     };
 
-    const handleProgressBarMouseDown = () => {
-        setIsDragging(true);
+    const handleLayerDrag = (e, initialX) => {
+        const currentX = e.clientX;
+        const deltaX = currentX - initialX;
+        const duration = videoRef.current.duration;
+        const newTime = (deltaX / timelineRef.current.offsetWidth) * duration;
+        videoRef.current.currentTime = newTime;
     };
 
-    const handleProgressBarMouseUp = () => {
-        setIsDragging(false);
-    };
-
-    const handleProgressBarMouseMove = (e) => {
-        if (!isDragging) {
-            return;
-        }
-        const percent = (e.clientX - progressBarRef.current.offsetLeft) / progressBarRef.current.offsetWidth;
-        videoRef.current.currentTime = percent * videoRef.current.duration;
-    };
 
     const handleDragOver = (e) => {
         e.preventDefault();
@@ -152,7 +171,6 @@ const EditorComponent = () => {
                     onDragStart={handleDragStart}
                     width={videoRef.current ? videoRef.current.offsetWidth : 0}
                     height={videoRef.current ? videoRef.current.offsetHeight : 0}
-
                 />
                 <video
                     ref={videoRef}
@@ -164,16 +182,15 @@ const EditorComponent = () => {
                      style={{
                          display: fileSelected ? "block" : "none"
                      }}>
-                    <div
-                        ref={progressBarRef}
-                        className="progress-bar-style"
-                        style={progressBarStyle}
-                        onMouseDown={handleProgressBarMouseDown}
-                        onMouseMove={handleProgressBarMouseMove}
-                        onMouseUp={handleProgressBarMouseUp}
-                        onMouseLeave={handleProgressBarMouseUp}
-                        onClick={handleProgressBarClick}
-                    />
+                    <div className="timeline" ref={timelineRef} style={timelineStyle} onClick={handleTimelineClick} onDrop={handleAddLayer}>
+                        <div ref={progressLineRef} className="progress-line" />
+                        {layers.map((layer, index) => (
+                            <Layer key={index} file={layer} selected={selectedLayer === index} onClick={() => setSelectedLayer(index)} onDrag={handleLayerDrag}/>
+                        ))}
+                    </div>
+
+
+
                     {!isPlaying && (
                         <button onClick={handlePlayClick}>Play</button>
                     )}
