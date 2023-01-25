@@ -170,6 +170,7 @@ const EditorComponent = () => {
     }
 
 
+
     return (
         <div className="left-side">
             <div ref={wrapperRef} className="wrapper-video">
@@ -184,16 +185,16 @@ const EditorComponent = () => {
                 />
                 <video
                     ref={videoRef}
-                    className={`video-style ${fileSelected ? 'file-selected' : 'file-not-selected'}`}
+                    className={`video-styles ${fileSelected ? 'file-selected' : 'file-not-selected'}`}
                     /*controls*/
-                    onTimeUpdate={handleTimeUpdate}
+                    onTimeUpdate={handleTimeUpdate} 
                 />
                 <div className="edit_video"
                      style={{
                          display: fileSelected ? "block" : "none"
                      }}>
                     <div className="timeline-wrapper" ref={timelineRef} style={timelineStyle}>
-                        <Timeline ref={timelineRef}/>
+                        <Timeline ref={timelineRef} />
                     </div>
 
                     {!isPlaying && (
