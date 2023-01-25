@@ -3,15 +3,6 @@
     src: url('../../fonts/Purple Smile.ttf') format('truetype');
 }
 
-h1 {
-    font-family: 'Font', serif;
-    font-style: italic;
-    align-self: center;
-    text-align: center;
-    color: #ff8fd1;
-
-}
-
 body {
     padding-top: 50px;
     transition: background-color .3s ease, color .3s ease;
@@ -27,10 +18,31 @@ body {
     align-items: flex-start;
 }
 
+h1 {
+    font-family: 'Font', serif;
+    font-style: italic;
+    align-self: center;
+    text-align: center;
+    color: #ff8fd1;
+}
+
+input[type="file"] {
+   display: none;
+}
+
 label {
     font-family: 'Font', serif;
-    color: #FF8FD1FF;
+    color: white;
+    background: #ffb9e4;
+    padding: 8px;
+    border-radius: 10px;
+    box-shadow: 6px 8px 8px -4px lightblue;
 }
+
+label:hover {
+    background: #ff68c5;
+}
+
 
 .timeline {
     width: 100%; /* Set the width of the element to fill its parent container */
@@ -128,12 +140,17 @@ label {
 }
 
 button {
-    background-color: #ffb9e4;
-    border-color: white;
+    font-family: 'Font', serif;
     color: white;
+    background: #ffb9e4;
+    padding: 8px 12px;
+    border-radius: 10px;
+    box-shadow: 6px 8px 8px -4px lightblue;
+    border-color: white;
 }
-input[type="file"] {
-    color: #ffb9e4;
+
+button:hover {
+    background: #ff68c5;
 }
 
 .equal-size {
@@ -190,96 +207,6 @@ img {
     padding: 20px;
 }
 
-/*sry das hier ist voll reingehackt weil die proper lösung sehr friemelig war vllt mach ich das noch gescheit*/
 .img2 {
     padding-top: 1500px;
-}
-
-
-/**The following are premade and i didnt modify them or use them yet*/
-.toggle {
-    background-color: rgb(185, 185, 185);
-    color: yellow;
-    height: 2em;
-    width: 2em;
-    text-align: center;
-    line-height: 2em;
-    vertical-align: middle;
-    border-radius: 100em;
-    font-size: x-large;
-    z-index: 100;
-    position: fixed;
-    bottom: 1em;
-    right: 1em;
-    cursor: pointer;
-    transition: background-color .2s ease;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-}
-
-.toggle:hover {
-    transition: background-color .2s ease;
-    background-color: rgb(146, 146, 146);
-}
-
-.playback {
-    position: relative;
-    height: 10px;
-    background: #2f3b44;
-    margin: 1rem 24px;
-    border-radius: 1em;
-}
-
-.playback .seekable {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgb(240, 240, 240);
-    cursor: pointer;
-}
-
-.playback .grabber {
-    position: absolute;
-    top: -4px;
-    bottom: -4px;
-    width: 18px;
-    border-radius: 2px;
-    z-index: 1;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.playback .grabber.start {
-    background: #a8d736;
-}
-
-.playback .grabber.end {
-    background: #fc4242;
-}
-
-.playback .grabber:hover {
-    transform: scaleY(1.4);
-}
-
-.playback .grabber svg {
-    user-drag: none;
-    -moz-user-select: none;
-    -webkit-user-drag: none;
-}
-
-.playback .progress {
-    background: #0072cf;
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    cursor: pointer;
-    pointer-events: none;
 }

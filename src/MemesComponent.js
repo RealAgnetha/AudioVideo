@@ -1,7 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import PerfectScrollbar from 'perfect-scrollbar';
 import './css/styles.css';
-import PropTypes from 'prop-types';
 
 function MemesComponent(props) {
     const wrapperRef = useRef(null);

@@ -89,11 +89,13 @@ const EditorComponent = () => {
         console.log(videoRef.current.src); // Log the src of the video element
         setFileSelected(true);
 
-        //todo auch hier timeline-related:
-        setTimelineData([{ start: 0, end: videoRef.current.duration }])
-
-
+        videoRef.current.addEventListener('durationchange', () => {
+            if (fileSelected && videoRef.current.duration > 0) {
+                setTimelineData([{start: 0, end: videoRef.current.duration}]);
+            }
+        });
     };
+
 
     const handlePlayClick = () => {
         // When the play button is clicked, play the video and update the state
@@ -102,7 +104,7 @@ const EditorComponent = () => {
 
         //todo timeline:
         const updateTimeline = () => {
-            setTimelineData([{ start: 0, end: videoRef.current.duration, current: videoRef.current.currentTime }])
+            setTimelineData([{start: 0, end: videoRef.current.duration, current: videoRef.current.currentTime}])
         }
         setInterval(updateTimeline, 100)
 
@@ -155,7 +157,7 @@ const EditorComponent = () => {
     }
 
     const handleTimeUpdate = () => {
-        const progress  = videoRef.current.progress;
+        const progress = videoRef.current.progress;
         setProgress(progress);
         setProgress(progress / videoRef.current.duration * 100);
     }
@@ -173,6 +175,29 @@ const EditorComponent = () => {
             videoRef.current.removeEventListener('timeupdate', handleTimeUpdate);
         }
     }, [fileSelected])
+
+
+    const [options, setOptions] = useState({});
+
+    useEffect(() => {
+        if (fileSelected && videoRef.current.duration > 0) {
+            const options = fileSelected && videoRef.current.duration > 0
+                ? {
+                    width: '100%',
+                    height: '200px',
+                    stack: false,
+                    start: 0,
+                    end: videoRef.current.duration,
+                    zoomMin: 100,
+                    type: 'box',
+                }
+                : {}
+
+            setTimelineData([{start: 0, end: videoRef.current.duration}]);
+            setOptions(options);
+        }
+    }, [fileSelected]);
+
 
     return (
         <div className="left-side">
@@ -195,10 +220,10 @@ const EditorComponent = () => {
                      style={{
                          display: fileSelected ? "block" : "none"
                      }}>
-                    <Timeline
-                        options={{}}
-                        items={timelineData}
-                        clickHandler={() => console.log('clicked')}
+                    <Timeline ref={timelineRef}
+                              options={options}
+                              items={timelineData}
+                              clickHandler={() => console.log('clicked')}
                     />
 
                     {!isPlaying && (
@@ -211,18 +236,19 @@ const EditorComponent = () => {
             </div>
             <div className="file-select">
                 {!fileSelected && (
-                    <label>Upload your video: </label>
+                    <label htmlFor="fileInput">Upload your video </label>
                 )}
                 {fileSelected && (
-                    <label>Upload new video: </label>
+                    <label htmlFor="fileInput">Upload new video </label>
                 )}
                 <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="video/*"
-                    style={{zIndex: 2}}
-                    onChange={handleFileSelect}
-                />
+                id="fileInput"
+                ref={fileInputRef}
+                type="file"
+                accept="video/*"
+                style={{zIndex: 2}}
+                onChange={handleFileSelect}
+            />
             </div>
         </div>
     );

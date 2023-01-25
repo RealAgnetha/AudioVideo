@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React from 'react';
 import MemesComponent from "./MemesComponent";
 import {EditorComponent} from "./EditorComponent.js";
 import {Header} from './Header';
