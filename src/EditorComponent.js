@@ -9,6 +9,10 @@ const EditorComponent = () => {
     const canvasRef = useRef(null);
     const fileInputRef = useRef(null);
     const timelineRef = useRef(null);
+    //todo hier bin ich
+    const [timelineData, setTimelineData] = useState([]);
+
+
     const [fileSelected, setFileSelected] = useState(false) //when file has been selected, change state
     const [isPlaying, setIsPlaying] = useState(false); // state for play/pause button
     const [progress, setProgress] = useState(0); // current progress of the video, in percent
@@ -55,10 +59,8 @@ const EditorComponent = () => {
         setY(y);
         setWidth(width);
         setHeight(height);
-
         setLayers([...layers, {img, x, y, width, height}])
     }
-
 
     useEffect(() => {
         if (!img) {
@@ -86,12 +88,24 @@ const EditorComponent = () => {
         videoRef.current.src = URL.createObjectURL(file);
         console.log(videoRef.current.src); // Log the src of the video element
         setFileSelected(true);
+
+        //todo auch hier timeline-related:
+        setTimelineData([{ start: 0, end: videoRef.current.duration }])
+
+
     };
 
     const handlePlayClick = () => {
         // When the play button is clicked, play the video and update the state
         videoRef.current.play();
         setIsPlaying(true);
+
+        //todo timeline:
+        const updateTimeline = () => {
+            setTimelineData([{ start: 0, end: videoRef.current.duration, current: videoRef.current.currentTime }])
+        }
+        setInterval(updateTimeline, 100)
+
     };
 
     const handlePauseClick = () => {
@@ -120,47 +134,6 @@ const EditorComponent = () => {
         });
     }, [videoRef, canvasRef]);
 
-
-    const handleAddLayer = (e) => {
-        console.log('handleAddLayer function called:', img);
-
-        e.preventDefault();
-        setLayers([...layers, draggedImage]);
-        setDraggedImage(null);
-    }
-
-
-    const progressLineRef = useRef(null);
-    const handleTimeUpdate = () => {
-        const currentTime = videoRef.current.currentTime;
-        const duration = videoRef.current.duration;
-        const progress = (currentTime / duration) * timelineRef.current.offsetWidth;
-        progressLineRef.current.style.width = `${progress}px`;
-    };
-
-    useEffect(() => {
-        videoRef.current.addEventListener("timeupdate", handleTimeUpdate);
-        return () => {
-            videoRef.current.removeEventListener("timeupdate", handleTimeUpdate);
-        };
-    }, []);
-
-    const handleTimelineClick = (e) => {
-        const clickPosition = e.clientX - timelineRef.current.offsetLeft;
-        const duration = videoRef.current.duration;
-        const newTime = (clickPosition / timelineRef.current.offsetWidth) * duration;
-        videoRef.current.currentTime = newTime;
-    };
-
-    const handleLayerDrag = (e, initialX) => {
-        const currentX = e.clientX;
-        const deltaX = currentX - initialX;
-        const duration = videoRef.current.duration;
-        const newTime = (deltaX / timelineRef.current.offsetWidth) * duration;
-        videoRef.current.currentTime = newTime;
-    };
-
-
     const handleDragOver = (e) => {
         e.preventDefault();
     };
@@ -169,7 +142,37 @@ const EditorComponent = () => {
         e.dataTransfer.setData('text/plain', e.target.src);
     }
 
+    const generateTimelineData = () => {
+        const duration = videoRef.current.duration;
+        const intervals = duration / 10;
+        let timelineData = [];
+        for (let i = 0; i < intervals; i++) {
+            const start = i * 10;
+            const end = start + 10;
+            timelineData.push({start, end});
+        }
+        setTimelineData(timelineData);
+    }
 
+    const handleTimeUpdate = () => {
+        const progress  = videoRef.current.progress;
+        setProgress(progress);
+        setProgress(progress / videoRef.current.duration * 100);
+    }
+
+    useEffect(() => {
+        if (fileSelected) {
+            generateTimelineData();
+        }
+    }, [fileSelected])
+    useEffect(() => {
+        if (fileSelected) {
+            videoRef.current.addEventListener('timeupdate', handleTimeUpdate);
+        }
+        return () => {
+            videoRef.current.removeEventListener('timeupdate', handleTimeUpdate);
+        }
+    }, [fileSelected])
 
     return (
         <div className="left-side">
@@ -187,15 +190,16 @@ const EditorComponent = () => {
                     ref={videoRef}
                     className={`video-styles ${fileSelected ? 'file-selected' : 'file-not-selected'}`}
                     /*controls*/
-                    onTimeUpdate={handleTimeUpdate} 
                 />
                 <div className="edit_video"
                      style={{
                          display: fileSelected ? "block" : "none"
                      }}>
-                    <div className="timeline-wrapper" ref={timelineRef} style={timelineStyle}>
-                        <Timeline ref={timelineRef} />
-                    </div>
+                    <Timeline
+                        options={{}}
+                        items={timelineData}
+                        clickHandler={() => console.log('clicked')}
+                    />
 
                     {!isPlaying && (
                         <button onClick={handlePlayClick}>Play</button>
