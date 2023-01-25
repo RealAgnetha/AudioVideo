@@ -1,6 +1,11 @@
 import {useEffect, useRef, useState} from "react";
 
-const Layer = ({ file, selected, onClick, onDrag }) => {
+const Layer = ({ file, selected, onClick, onDrag, handleAddLayer }) => {
+    const handleDragEnd = () => {
+        setLayerStyle({});
+        handleAddLayer(file)
+    };
+
     const layerRef = useRef(null);
     const [layerStyle, setLayerStyle] = useState({});
 
@@ -19,10 +24,6 @@ const Layer = ({ file, selected, onClick, onDrag }) => {
     const handleDragStart = (e) => {
         setLayerStyle({ display: "none" });
         onDrag(e, layerRef.current.offsetLeft);
-    };
-
-    const handleDragEnd = () => {
-        setLayerStyle({});
     };
 
     return (

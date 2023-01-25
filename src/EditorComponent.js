@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
-import Layer from "./Layer";
+import Timeline from 'react-visjs-timeline'
+
 import './css/styles.css';
 
 const EditorComponent = () => {
@@ -11,16 +12,20 @@ const EditorComponent = () => {
     const [fileSelected, setFileSelected] = useState(false) //when file has been selected, change state
     const [isPlaying, setIsPlaying] = useState(false); // state for play/pause button
     const [progress, setProgress] = useState(0); // current progress of the video, in percent
-
-
     //const [isDragging, setIsDragging] = useState(false); // flag to indicate if progress bar is being dragged
-
     const [img, setImg] = useState(null);
     const [x, setX] = useState(0);
     const [y, setY] = useState(0);
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
     const [layers, setLayers] = useState([]); // state for layers
+
+    useEffect(() => {
+        console.log('layers state:', layers);
+        //...
+    }, [layers])
+
+
     const [isDragging, setIsDragging] = useState(false); // flag to indicate if progress bar is being dragged
     const [selectedLayer, setSelectedLayer] = useState(null); // state for the selected layer
     const timelineStyle = {
@@ -28,10 +33,14 @@ const EditorComponent = () => {
     };
     let intervalId;
 
+    const [draggedImage, setDraggedImage] = useState(null);
+
+
     const handleDrop = (e) => {
         e.preventDefault();
         const img = document.createElement('img');
         img.src = e.dataTransfer.getData('text/plain');
+        setDraggedImage(img);
 
         // Get the position of the canvas element
         const canvasRect = canvasRef.current.getBoundingClientRect();
@@ -41,14 +50,15 @@ const EditorComponent = () => {
         const y = e.clientY - canvasRect.top;
         const width = img.width;
         const height = img.height;
-
         setImg(img);
         setX(x);
         setY(y);
         setWidth(width);
         setHeight(height);
 
+        setLayers([...layers, {img, x, y, width, height}])
     }
+
 
     useEffect(() => {
         if (!img) {
@@ -112,11 +122,13 @@ const EditorComponent = () => {
 
 
     const handleAddLayer = (e) => {
+        console.log('handleAddLayer function called:', img);
+
         e.preventDefault();
-        const file = e.dataTransfer.files[0];
-        console.log(file);
-        setLayers([...layers, file]);
+        setLayers([...layers, draggedImage]);
+        setDraggedImage(null);
     }
+
 
     const progressLineRef = useRef(null);
     const handleTimeUpdate = () => {
@@ -157,12 +169,10 @@ const EditorComponent = () => {
         e.dataTransfer.setData('text/plain', e.target.src);
     }
 
+
     return (
         <div className="left-side">
-            <div
-                ref={wrapperRef}
-                className="wrapper-video"
-            >
+            <div ref={wrapperRef} className="wrapper-video">
                 <canvas
                     ref={canvasRef}
                     className={`canvas-style ${fileSelected ? 'file-selected' : 'file-not-selected'}`}
@@ -176,20 +186,15 @@ const EditorComponent = () => {
                     ref={videoRef}
                     className={`video-style ${fileSelected ? 'file-selected' : 'file-not-selected'}`}
                     /*controls*/
-                    onTimeUpdate={handleTimeUpdate} className="video-styles"
+                    onTimeUpdate={handleTimeUpdate}
                 />
                 <div className="edit_video"
                      style={{
                          display: fileSelected ? "block" : "none"
                      }}>
-                    <div className="timeline" ref={timelineRef} style={timelineStyle} onClick={handleTimelineClick} onDrop={handleAddLayer}>
-                        <div ref={progressLineRef} className="progress-line" />
-                        {layers.map((layer, index) => (
-                            <Layer key={index} file={layer} selected={selectedLayer === index} onClick={() => setSelectedLayer(index)} onDrag={handleLayerDrag}/>
-                        ))}
+                    <div className="timeline-wrapper" ref={timelineRef} style={timelineStyle}>
+                        <Timeline ref={timelineRef}/>
                     </div>
-
-
 
                     {!isPlaying && (
                         <button onClick={handlePlayClick}>Play</button>
@@ -198,7 +203,6 @@ const EditorComponent = () => {
                         <button onClick={handlePauseClick}>Pause</button>
                     )}
                 </div>
-
             </div>
             <div className="file-select">
                 {!fileSelected && (
@@ -207,7 +211,6 @@ const EditorComponent = () => {
                 {fileSelected && (
                     <label>Upload new video: </label>
                 )}
-
                 <input
                     ref={fileInputRef}
                     type="file"
@@ -218,7 +221,6 @@ const EditorComponent = () => {
             </div>
         </div>
     );
-
 };
 
 export {EditorComponent};

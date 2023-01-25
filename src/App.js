@@ -1,6 +1,7 @@
+import React, {useEffect, useRef} from 'react';
 import MemesComponent from "./MemesComponent";
 import {EditorComponent} from "./EditorComponent.js";
-import Header from './Header';
+import {Header} from './Header';
 import './css/styles.css';
 
 function App() {
@@ -11,9 +12,9 @@ function App() {
                 <EditorComponent/>
                 <MemesComponent/>
             </div>
-
         </div>
     );
+
 }
 
 export default App;

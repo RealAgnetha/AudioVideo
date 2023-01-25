@@ -10,12 +10,14 @@
     "@testing-library/user-event": "^13.5.0",
     "ffmpeg": "^0.0.4",
     "perfect-scrollbar": "^1.5.5",
-    "react": "^18.2.0",
+    "react": "^16.13.0",
     "react-bootstrap": "^2.7.0",
-    "react-dom": "^18.2.0",
+    "react-dom": "^16.13.0",
     "react-scripts": "5.0.1",
     "react-video-editor": "^1.0.2",
+    "react-visjs-timeline": "^1.6.0",
     "remotion": "^3.3.27",
+    "vis": "^4.21.0-EOL",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -41,5 +43,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prop-types": "^15.8.1",
+    "recoil": "^0.7.6"
   }
 }

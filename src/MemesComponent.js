@@ -1,8 +1,9 @@
 import React, {useEffect, useRef} from 'react';
 import PerfectScrollbar from 'perfect-scrollbar';
 import './css/styles.css';
+import PropTypes from 'prop-types';
 
-function MemesComponent() {
+function MemesComponent(props) {
     const wrapperRef = useRef(null);
     useEffect(() => {
         const ps = new PerfectScrollbar(wrapperRef.current, {
@@ -21,6 +22,15 @@ function MemesComponent() {
         e.dataTransfer.setData('text/plain', e.target.src);
     }
 
+    const handleDrop = (e) => {
+        e.preventDefault();
+        const img = document.createElement('img');
+        img.src = e.dataTransfer.getData('text/plain');
+        console.log('handleDrop function called:', img);
+
+        props.handleAddLayer(img);
+    }
+
     //todo img2 hack broken, wird immer größer je mehr elemente
     return (
         <div className="right-side">
@@ -30,15 +40,21 @@ function MemesComponent() {
                      draggable={true}
                      className="equal-size img2" onDragStart={handleDrag}/>
                 <img src="https://media.tenor.com/spSgkqK707kAAAAM/ok-all.gif" alt="thumbs up"
-                     draggable={true} className="equal-size" onDragStart={handleDrag}/>
+                     draggable={true} className="equal-size" onDragStart={handleDrag}
+                onDrop={handleDrop}
+
+                />
 
 
                 <img src="https://media.tenor.com/e8O3ysG8kHMAAAAd/dance-dancing.gif" alt="disco kid"
-                     draggable={true} className="equal-size" onDragStart={handleDrag}/>
+                     draggable={true} className="equal-size" onDragStart={handleDrag}                 onDrop={handleDrop}
+                />
                 <img src="https://media.tenor.com/8XNZFtwJxscAAAAM/reverse-card-uno.gif" alt="reverse uno card"
-                     draggable={true} className="equal-size" onDragStart={handleDrag}/>
+                     draggable={true} className="equal-size" onDragStart={handleDrag}                 onDrop={handleDrop}
+                />
                 <img src="https://media.tenor.com/3QNUdJR3PUgAAAAj/twitch-youngmulti.gif" alt="literally fire"
-                     draggable={true} className="equal-size" onDragStart={handleDrag}/>
+                     draggable={true} className="equal-size" onDragStart={handleDrag}                 onDrop={handleDrop}
+                />
                 <img src="https://media.tenor.com/BP70qe8X0J8AAAAM/crycat-crying-cat.gif" alt="crying cat ok"
                      draggable={true} className="equal-size" onDragStart={handleDrag}/>
                 <img src="https://media.tenor.com/pEMrIYO4dKgAAAAM/is-this-a-pigeon-meme.gif" alt="is this a pigeon"
@@ -63,5 +79,6 @@ function MemesComponent() {
         </div>
     );
 }
+
 
 export default MemesComponent;
