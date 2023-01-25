@@ -1,20 +1,22 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import MemesComponent from "./MemesComponent";
 import {EditorComponent} from "./EditorComponent.js";
-import {Header} from './Header';
+import Header from './Header';
 import './css/styles.css';
 
 function App() {
+
+    const [isPlaying, setIsPlaying] = useState(false);
+
     return (
         <div className="App">
-            <Header/>
+            <Header />
             <div className="grid-container">
-                <EditorComponent/>
-                <MemesComponent/>
+                <EditorComponent isPlaying={isPlaying} setIsPlaying={setIsPlaying}/>
+                <MemesComponent isPlaying={isPlaying}/>
             </div>
         </div>
     );
-
 }
 
 export default App;
