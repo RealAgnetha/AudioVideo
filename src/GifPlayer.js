@@ -6,7 +6,7 @@ function GifPlayer({ gifUrl, stillUrl, isPlaying }) {
     return (
         <>
             <Draggable>
-                <img className="equal-size" draggable="false" src={isPlaying ? gifUrl : stillUrl} />
+                <img className="equal-size" draggable="false" src={isPlaying ? gifUrl : stillUrl}  alt="alt text"/>
             </Draggable>
         </>
     );

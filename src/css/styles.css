@@ -6,7 +6,7 @@
 body {
     padding-top: 50px;
     transition: background-color .3s ease, color .3s ease;
-    background-color: mintcream;
+    background-color: #ddffef;
     padding-bottom: 100px;
 }
 
@@ -118,18 +118,45 @@ label:hover {
     float: left;
 }
 
+.gifs-container, .pngs-container {
+    padding-left: 50px;
+    padding-right: 50px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-y: scroll;
+    flex-wrap: wrap;
+}
+
+
+
 .wrapper-memes {
     display: flex;
     flex-direction: column;
     border: 4px solid #ffb9e4;
     border-radius: 10px; /*  rounded corners */
-    padding: 50px;
     align-items: center;
     justify-content: center;
     /*overflow-y: scroll;*/
     max-height: 500px;
     background-color: #fbfffd;
+    flex-wrap: wrap;
+    overflow: visible;
 }
+
+.react-tabs__tab-list{
+    display: flex;
+    list-style: none;
+}
+.react-tabs__tab {
+    padding: 5px 10px;
+    margin-right: 10px;
+}
+
+.react-tabs__tab {
+    border: 1px solid #ffb9e4;
+}
+
 
 ::-webkit-scrollbar {
     width: 10px;
