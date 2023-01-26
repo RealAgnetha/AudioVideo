@@ -23,7 +23,7 @@ function TimePanel() {
         for (let i = 0; i < videoList.length; i++) {
             let video = videoList[i]
             groups.push({ id: "video", content: "&#160" })
-            dataset.push({ id: video.id, className: "video", start: video.startTime, end: video.endTime, content: "video", group: "video" , style:"height: 32.2222px;"})
+            dataset.push({ id: video.id, className: "video", start: video.startTime, end: video.endTime, content: "video", group: "video" , style:"height: 32.2222px"})
         }
 
         groups.push({ id: "image", content: "&#160" })
