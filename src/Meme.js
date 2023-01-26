@@ -59,7 +59,7 @@ function Meme({ url, name, id }) {
     }
 
     return (
-        <div className="right-side">
+        <div className="equal-size">
             {gif}
         </div>
     );
