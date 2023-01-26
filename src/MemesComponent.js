@@ -1,14 +1,21 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PerfectScrollbar from 'perfect-scrollbar';
 import Draggable from 'react-draggable';
 import GifPlayer from "./GifPlayer";
 import './css/styles.css';
+import { imageListState, videoListState, textListState, playState, timeState, editState, zoomState, elementState } from './atoms';
+import { useRecoilState } from 'recoil';
 
 
 function MemesComponent({ isPlaying }) {
     const wrapperRef = useRef(null);
-    const canvasRef = useRef<HTMLDivElement>null;
-
+    const canvasRef = useRef < HTMLDivElement > null;
+    const [imageList, setImageList] = useRecoilState(imageListState);
+    const [displayGif1Initially, setDisplayGif1Initially] = useState(true);
+    const [time, setTime] = useRecoilState(timeState);
+    const [loadImage, setLoadImage] = useState(false)
+    const [x, setX]= useState(0)
+    const [y, setY]= useState(0)
 
     useEffect(() => {
         const ps = new PerfectScrollbar(wrapperRef.current, {
@@ -25,6 +32,63 @@ function MemesComponent({ isPlaying }) {
 
     const handleDrag = (e) => {
         e.dataTransfer.setData('text/plain', e.target.src);
+    }
+
+    function uploadImage(img, id) {
+        setLoadImage(true)
+        if (img !== null) {
+            var image = new Image();
+            image.src = img
+
+            let newArr = [...imageList]
+            let scaling = 1
+            if (image.width > 400) {
+                scaling = 400 / image.width
+            }
+            newArr.push({ "id": id, group: "image", "src": image.src, "x": x, "y": y, width: image.width * scaling, height: image.height * scaling, startTime: 0, endTime: 5000 })
+            setImageList(newArr);
+            setLoadImage(false)
+
+            setDisplayGif1Initially(false);
+        }
+        //setElement(imageList.length)
+    }
+
+    /*function shouldimageberendered(gifToRender) {
+        let foundGif;
+        for (let i = 0; i < imageList.length; i++) {
+            if (imageList[i].id == gifToRender) foundGif = imageList[i];
+        }
+
+        if (displayGif1Initially || (foundGif != null && time > foundGif.startTime && time < foundGif.endTime)) {
+            return "inline-block"
+        } else {
+            return "none"
+        }
+    }*/
+    const [position, setPosition] = useState({});
+    let gif1;
+    let foundGif;
+    for (let i = 0; i < imageList.length; i++) {
+        if (imageList[i].id == 0) foundGif = imageList[i];
+    }
+    if (displayGif1Initially) {
+        gif1 = <Draggable id="dragGif1" position={{x: x, y:y}}
+                    onStop={(event, dragElement) => {
+                            setX(dragElement.x);
+                            setY(dragElement.y);
+                            uploadImage("https://media.giphy.com/media/BXjqytvu9bKzCUHdzz/giphy.gif", 0);
+                        }}>
+            <img draggable="false" display="inline-block" src="https://media.giphy.com/media/BXjqytvu9bKzCUHdzz/giphy.gif" alt="vibing cat" className="equal-size" />
+        </Draggable>
+    } else {
+        if (foundGif != null && time > foundGif.startTime && time < foundGif.endTime) {
+            gif1 = <Draggable id="dragGif2" position={{x: x, y:y}} style={{zIndex: 2}}>
+                <img draggable="false" display="inline-block" src="https://media.giphy.com/media/BXjqytvu9bKzCUHdzz/giphy.gif" alt="vibing cat" className="equal-size" />
+            </Draggable>
+        } else {
+            gif1 = <div />
+        }
     }
 
     //TODO: img2 hack broken, wird immer größer je mehr elemente
@@ -64,14 +128,13 @@ function MemesComponent({ isPlaying }) {
                 {/*<img src="https://media.giphy.com/media/dS1rQkeAlZbmo/giphy.gif" alt="lol dont care"*/}
                 {/*     draggable={true} className="equal-size" onDragStart={handleDrag}/>*/}
 
-                <Draggable id="dragGif1" bounds="canvas" offsetParent={canvasRef.current}>
-                    <img draggable="false" src="https://media.giphy.com/media/BXjqytvu9bKzCUHdzz/giphy.gif" alt="vibing cat" className="equal-size"/>
-                </Draggable>
-                <Draggable bounds={{left: -1200, top: -500, right: -600, bottom: -200}}>
+                {gif1}
+
+                <Draggable bounds={{ width: "60%", height: "56.25%", float: "left", position: "relative" }}>
                     <img draggable="false" src="https://media.giphy.com/media/oebo5waezwOIk6BTA9/giphy.gif" alt="sunglasses" className="equal-size" />
                 </Draggable>
 
-                    <GifPlayer gifUrl="memes/cat2.gif" stillUrl="memes/cat2_still.png" isPlaying={isPlaying} />
+                <GifPlayer gifUrl="memes/cat2.gif" stillUrl="memes/cat2_still.png" isPlaying={isPlaying} />
             </div>
         </div>
     );

@@ -23,7 +23,7 @@ function TimePanel() {
         for (let i = 0; i < videoList.length; i++) {
             let video = videoList[i]
             groups.push({ id: "video", content: "&#160" })
-            dataset.push({ id: video.id, className: "video", start: video.startTime, end: video.endTime, content: "video", group: "video" })
+            dataset.push({ id: video.id, className: "video", start: video.startTime, end: video.endTime, content: "video", group: "video" , style:"height: 32.2222px;"})
         }
 
         groups.push({ id: "image", content: "&#160" })
@@ -124,7 +124,7 @@ function TimePanel() {
         <div style={{ paddingLeft: "10px" }}>
 
             {props.item.content === "video" ?
-                <div style={{ display: "flex" }}>
+                <div style={{ display: "absolute" }}>
                     {videoList[0].previewImages !== undefined ? videoList[0].previewImages.map((src) => <img style={{ height: props.element.height }} src={src} />) : <div>Video</div>}
                 </div>
                 : props.item.content}

@@ -1,4 +1,6 @@
 import React, {useRef, useEffect, useState, useCallback} from 'react';
+import { imageListState, videoListState, playState, timeState, editState, zoomState, elementState } from './atoms';
+import {useRecoilState} from 'recoil';
 
 const EditorComponent = React.memo(({ isPlaying, setIsPlaying }) => {
     const wrapperRef = useRef(null);
@@ -10,12 +12,16 @@ const EditorComponent = React.memo(({ isPlaying, setIsPlaying }) => {
     // const [isPlaying, setIsPlaying] = useState(false); // state for play/pause button
     const [progress, setProgress] = useState(0); // current progress of the video, in percent
     const [isDragging, setIsDragging] = useState(false); // flag to indicate if progress bar is being dragged
-
+    const [videoList, setVideoList] = useRecoilState(videoListState);
     const [img, setImg] = useState(null);
     const [x, setX] = useState(0);
     const [y, setY] = useState(0);
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
+    const [play, setPlay] = useRecoilState(playState);
+    const [time, setTime] = useRecoilState(timeState);
+    const [zoom, setZoom] = useRecoilState(zoomState)
+
 
     let intervalId;
 
@@ -65,11 +71,24 @@ const EditorComponent = React.memo(({ isPlaying, setIsPlaying }) => {
     const handleFileSelect = () => {
         const file = fileInputRef.current.files[0];
         console.log(file); // Log the selected file
-        videoRef.current.src = URL.createObjectURL(file);
-        console.log(videoRef.current.src); // Log the src of the video element
+        const url = URL.createObjectURL(file);
+        videoRef.current.src=url;
+        // create a hidden video element 
+        const video = document.createElement('video');
+        // set the file object URL as the src of the video element
+        video.src = url;
+        // get video/audio duration when it's available
+        video.addEventListener('loadedmetadata', () => {
+          console.log(`Duration: ${video.duration.toFixed(2)}s`);
+          let duration=video.duration * 1000;
+          setVideoList([{ id: 0, "src": URL.createObjectURL(fileInputRef.current.files[0]), file: fileInputRef.current.files[0], duration: duration, "x": null, "y": null, startTime: 0, endTime: duration, trimmStart: 0.0, trimmEnd: 0.0 }]);
+          setZoom(duration);
+        });
+        
         setFileSelected(true);
     };
 
+    
     // const handlePlayClick = () => {
     //     // When the play button is clicked, play the video and update the state
     //     videoRef.current.play();
@@ -90,10 +109,11 @@ const EditorComponent = React.memo(({ isPlaying, setIsPlaying }) => {
     const handleClick = useCallback(() => {
         if (!isPlaying){
             videoRef.current.play();
-
+            setPlay(play);
         }
         else if (isPlaying) {
             videoRef.current.pause();
+            setPlay(!play);
         }
         setIsPlaying(prevState => !prevState);
     });
@@ -122,6 +142,8 @@ const EditorComponent = React.memo(({ isPlaying, setIsPlaying }) => {
 
     const handleTimeUpdate = () => {
         setProgress((videoRef.current.currentTime / videoRef.current.duration) * 100);
+        setTime(videoRef.current.currentTime*1000);
+        console.log(videoRef.current.currentTime*1000);
     };
 
     // const handleProgressBarClick = (e) => {
@@ -174,6 +196,7 @@ const EditorComponent = React.memo(({ isPlaying, setIsPlaying }) => {
                 }}
             />
             <video
+                id="videoid"
                 ref={videoRef}
                 /*controls*/
                 style={{
@@ -198,7 +221,7 @@ const EditorComponent = React.memo(({ isPlaying, setIsPlaying }) => {
                     ref={fileInputRef}
                     type="file"
                     accept="video/*"
-                    style={{zIndex: 2}}
+                    style={{zIndex: 1}}
                     onChange={handleFileSelect}
                 />
             </div>
