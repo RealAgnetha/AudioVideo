@@ -138,9 +138,7 @@ const EditorComponent = React.memo(({isPlaying, setIsPlaying}) => {
                     style={{
                         display: fileSelected ? "block" : "none"
                     }}/>
-
             </div>
-
             <div className="file-select">
                 {!fileSelected && (
                     <label htmlFor="fileInput">Upload your video </label>

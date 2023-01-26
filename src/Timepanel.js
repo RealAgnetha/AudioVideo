@@ -13,7 +13,6 @@ function TimePanel() {
     const [element, setElement] = useRecoilState(elementState);
     const [zoom, setZoom] = useRecoilState(zoomState);
 
-
     let timelineref = React.createRef();
 
     function convertAtomsToDataset() {
@@ -109,14 +108,12 @@ function TimePanel() {
     }, [time])
 
     const ItemTemplate = (props) => (
-        <div style={{ paddingLeft: "10px" }}>
-
+        <div style={{ paddingLeft: "0px" }}>
             {props.item.content === "video" ?
                 <div style={{ display: "absolute" }}>
                     {videoList[0].previewImages !== undefined ? videoList[0].previewImages.map((src) => <img style={{ height: props.element.height }} src={src} />) : <div>Video</div>}
                 </div>
                 : props.item.content}
-
         </div>
     )
 
@@ -155,8 +152,6 @@ function TimePanel() {
         editable: true,
 
         onMove: function (item, callback) {
-
-
             if (item.className == "image") {
                 changestartinatomimage(item.id, item.start.getTime(), item.end.getTime(), item.group)
             }
@@ -164,13 +159,11 @@ function TimePanel() {
             if (item.className == "video") {
                 changestartinatomvideo(item.id, item.start.getTime(), item.end.getTime())
             }
-
         },
 
         onRemove: function (item, callback) {
             deleteimageinatom(item.id)
         }
-
     }
 
     return (
