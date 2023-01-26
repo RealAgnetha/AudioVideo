@@ -1,13 +1,5 @@
 
-import {
-    RecoilRoot,
-    atom,
-    selector,
-    useRecoilState,
-    useRecoilValue,
-  } from 'recoil';
-
-  import React from 'react'
+import {atom} from 'recoil';
 
 
 export const videoListState = atom({
@@ -25,8 +17,6 @@ export const videoListState = atom({
     default: [],
   });
 
-
-
   export const playState = atom({
     key: 'playState',
     default: false
@@ -34,7 +24,7 @@ export const videoListState = atom({
 
   export const timeState = atom({
     key: 'timeState',
-    default: 0
+    default: 1
   })
 
   export const editState = atom({
