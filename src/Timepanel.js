@@ -58,7 +58,6 @@ function TimePanel() {
     function deleteimageinatom(id) {
         id = id - videoList.length
         setImageList((imageList) => imageList.filter((value, index) => value !== imageList[id]));
-        rerender
     }
 
     function changestartinatomvideo(id, newstart, newend) {
