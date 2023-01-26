@@ -66,7 +66,7 @@ function MemesComponent({ isPlaying }) {
             return "none"
         }
     }*/
-    const [position, setPosition] = useState({});
+
     let gif1;
     let foundGif;
     for (let i = 0; i < imageList.length; i++) {
@@ -78,12 +78,16 @@ function MemesComponent({ isPlaying }) {
                             setX(dragElement.x);
                             setY(dragElement.y);
                             uploadImage("https://media.giphy.com/media/BXjqytvu9bKzCUHdzz/giphy.gif", 0);
-                        }}>
+                        }} style={{zIndex: 2}}>
             <img draggable="false" display="inline-block" src="https://media.giphy.com/media/BXjqytvu9bKzCUHdzz/giphy.gif" alt="vibing cat" className="equal-size" />
         </Draggable>
     } else {
         if (foundGif != null && time > foundGif.startTime && time < foundGif.endTime) {
-            gif1 = <Draggable id="dragGif2" position={{x: x, y:y}} style={{zIndex: 2}}>
+            gif1 = <Draggable id="dragGif2" position={{x: x, y:y}}
+            onStop={(event, dragElement) => {
+                    setX(dragElement.x);
+                    setY(dragElement.y);
+                }} style={{zIndex: 2}}>
                 <img draggable="false" display="inline-block" src="https://media.giphy.com/media/BXjqytvu9bKzCUHdzz/giphy.gif" alt="vibing cat" className="equal-size" />
             </Draggable>
         } else {
