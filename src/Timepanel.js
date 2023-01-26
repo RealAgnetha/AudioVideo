@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import * as ReactDOM from 'react-dom';
 import { imageListState, videoListState, playState, timeState, editState, zoomState, elementState } from './atoms';
 import { useRecoilState, } from 'recoil';
-import Timeline from 'react-visjs-timeline'
+import Timeline from 'react-visjs-timeline';
 
 function TimePanel() {
     const [videoList, setVideoList] = useRecoilState(videoListState);
@@ -11,7 +11,7 @@ function TimePanel() {
     const [time, setTime] = useRecoilState(timeState);
     const [edit, setEdit] = useRecoilState(editState);
     const [element, setElement] = useRecoilState(elementState);
-    const [zoom, setZoom] = useRecoilState(zoomState)
+    const [zoom, setZoom] = useRecoilState(zoomState);
 
 
     let timelineref = React.createRef();
@@ -21,9 +21,9 @@ function TimePanel() {
         var groups = [];
 
         for (let i = 0; i < videoList.length; i++) {
-            let video = videoList[i]
+            let video = videoList[i];
             groups.push({ id: "video", content: "&#160" })
-            dataset.push({ id: video.id, className: "video", start: video.startTime, end: video.endTime, content: "video", group: "video" , style:"height: 32.2222px"})
+            dataset.push({ id: video.id, className: "video", start: video.startTime, end: video.endTime, content: "video", group: "video", style: "height: 32.2222px" })
         }
 
         groups.push({ id: "image", content: "&#160" })
@@ -108,18 +108,6 @@ function TimePanel() {
         timelineref.current.$el.setCustomTime(time, "currenttime")
     }, [time])
 
-    var items = [
-        {
-            start: new Date(2010, 7, 15),
-            end: new Date(2010, 8, 2),  // end is optional
-            content: 'Trajectory A'
-        }
-    ];
-
-    function caluc(date) {
-        return "test"
-    }
-
     const ItemTemplate = (props) => (
         <div style={{ paddingLeft: "10px" }}>
 
@@ -142,7 +130,6 @@ function TimePanel() {
         stackSubgroups: true,
         showMajorLabels: false,
         showCurrentTime: true,
-        //type: 'background',
         zoomMax: zoom,
         zoomMin: zoom,
         zoomable: false,
@@ -186,19 +173,10 @@ function TimePanel() {
 
     }
 
-
-
-
-
-
-
     return (
         <div id="timepanel">
             <div style={{ position: 'relative' }}>
                 <div style={{ display: "flex" }}>
-
-
-                    {/*<Slider waria-label="Volume" value={zoom} onChange={e => changeZoom(e.target.value)} onChangeCommitted={() => resetTimeline()} min={1000} max={100000} style = {{margin:"1.5vh", width:"30%"}}/>*/}
                 </div>
                 <div style={{ overflow: "scroll" }}>
                     <div style={{ overflow: "scroll" }}>
@@ -210,8 +188,6 @@ function TimePanel() {
                 </div>
             </div>
         </div>
-
-
     )
 }
 
