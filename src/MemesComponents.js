@@ -12,14 +12,35 @@ function MemesComponent() {
                 <Meme url={"https://media.giphy.com/media/BXjqytvu9bKzCUHdzz/giphy.gif"}
                     id={0}
                     name={"vibing cat"} />
-
                 <Meme url={"https://media.giphy.com/media/oebo5waezwOIk6BTA9/giphy.gif"}
                     id={1}
                     name={"sunglasses"} />
-
                 <Meme url={"https://media.tenor.com/pEMrIYO4dKgAAAAM/is-this-a-pigeon-meme.gif"}
                     id={2}
                     name={"is this a pigeon"} />
+
+                {/*<Meme url={"https://media.giphy.com/media/BXjqytvu9bKzCUHdzz/giphy.gif"}*/}
+                {/*      id={3}*/}
+                {/*      name={"vibing cat"} />*/}
+
+                {/*<Meme url={"https://media.giphy.com/media/oebo5waezwOIk6BTA9/giphy.gif"}*/}
+                {/*      id={4}*/}
+                {/*      name={"sunglasses"} />*/}
+
+                {/*<Meme url={"https://media.tenor.com/pEMrIYO4dKgAAAAM/is-this-a-pigeon-meme.gif"}*/}
+                {/*      id={5}*/}
+                {/*      name={"is this a pigeon"} />*/}
+                {/*<Meme url={"https://media.giphy.com/media/BXjqytvu9bKzCUHdzz/giphy.gif"}*/}
+                {/*      id={7}*/}
+                {/*      name={"vibing cat"} />*/}
+
+                {/*<Meme url={"https://media.giphy.com/media/oebo5waezwOIk6BTA9/giphy.gif"}*/}
+                {/*      id={7}*/}
+                {/*      name={"sunglasses"} />*/}
+
+                {/*<Meme url={"https://media.tenor.com/pEMrIYO4dKgAAAAM/is-this-a-pigeon-meme.gif"}*/}
+                {/*      id={8}*/}
+                {/*      name={"is this a pigeon"} />*/}
             </div>
         </div>
     );

@@ -137,7 +137,7 @@ label:hover {
     align-items: center;
     justify-content: center;
     /*overflow-y: scroll; */
-    max-height: 500px;
+    max-height: 900px;
     background-color: #fbfffd;
     flex-wrap: wrap;
     overflow: visible;

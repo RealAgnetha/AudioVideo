@@ -1,6 +1,8 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {playState, timeState, videoListState, zoomState} from './atoms';
 import {useRecoilState} from 'recoil';
+import TimePanel from './Timepanel';
+
 
 const EditorComponent = React.memo(({isPlaying, setIsPlaying}) => {
     const wrapperRef = useRef(null);
@@ -120,6 +122,7 @@ const EditorComponent = React.memo(({isPlaying, setIsPlaying}) => {
                     onTimeUpdate={handleTimeUpdate}
                 />
 
+
                 <div className="controls-container"
                      style={{
                          display: fileSelected ? "block" : "none"
@@ -131,6 +134,11 @@ const EditorComponent = React.memo(({isPlaying, setIsPlaying}) => {
                         <button onClick={handleClick}>Pause</button>
                     )}
                 </div>
+                <TimePanel
+                    style={{
+                        display: fileSelected ? "block" : "none"
+                    }}/>
+
             </div>
 
             <div className="file-select">
