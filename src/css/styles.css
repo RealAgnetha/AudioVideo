@@ -157,7 +157,6 @@ label:hover {
     border: 1px solid #ffb9e4;
 }
 
-
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -221,14 +220,6 @@ button:hover {
     padding-top: 20px;
 }
 
-.progress-bar-style {
-    height: 10px;
-    background-color: #ffb9e4;
-    position: relative;
-    bottom: 10px;
-    left: 0;
-    cursor: pointer;
-}
 
 img {
     padding: 20px;
