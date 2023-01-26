@@ -28,8 +28,9 @@ function TimePanel() {
 
         groups.push({ id: "image", content: "&#160" })
         for (let i = 0; i < imageList.length; i++) {
-            let image = imageList[i]
-            dataset.push({ id: image.id + videoList.length, className: "image", start: image.startTime, end: image.endTime, content: "image", group: "image" })
+            let image = imageList[i];
+            let imageNum = image.id+1;
+            dataset.push({ id: image.id + videoList.length, className: "image", start: image.startTime, end: image.endTime, content: "image "+ imageNum, group: "image" })
         }
 
         groups.push({ id: 0, content: "&#160" })
@@ -57,6 +58,7 @@ function TimePanel() {
     function deleteimageinatom(id) {
         id = id - videoList.length
         setImageList((imageList) => imageList.filter((value, index) => value !== imageList[id]));
+        rerender
     }
 
     function changestartinatomvideo(id, newstart, newend) {
