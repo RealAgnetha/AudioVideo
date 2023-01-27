@@ -1,0 +1,30 @@
+.light {
+    padding-top: 50px;
+    transition: background-color .3s ease, color .3s ease;
+    background-color: #ddffef;
+    padding-bottom: 100px;
+    /*color: #ff8fd1;*/
+    color: #ffb9e4;
+}
+
+.light h1 {
+    color: #ff8fd1;
+}
+
+.dark {
+    background-color: #c2733b;
+    color: #ffffff;
+}
+
+
+button[type='dark-btn'] {
+    background-color: #333;
+    color: #fff;
+}
+
+button[type='dark-btn']:hover {
+    background-color: #7c2d2d;
+    color: #fff;
+}
+
+
