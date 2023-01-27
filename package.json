@@ -8,16 +8,18 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "atoms": "^0.2.0",
     "ffmpeg": "^0.0.4",
     "perfect-scrollbar": "^1.5.5",
-    "react": "^16.13.0",
-    "react-bootstrap": "^2.7.0",
-    "react-dom": "^16.13.0",
+    "react": "^16.0.0",
+    "react-dnd": "^16.0.1",
+    "react-dom": "^16.0.0",
     "react-draggable": "^4.4.5",
+    "react-resizable": "^3.0.4",
     "react-scripts": "5.0.1",
-    "react-tabs": "^3.2.3",
     "react-video-editor": "^1.0.2",
     "react-visjs-timeline": "^1.6.0",
+    "recoil": "^0.7.6",
     "remotion": "^3.3.27",
     "vis": "^4.21.0-EOL",
     "web-vitals": "^2.1.4"
@@ -45,9 +47,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "prop-types": "^15.8.1",
-    "recoil": "^0.7.6"
   }
 }
