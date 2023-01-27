@@ -19,8 +19,7 @@ Atoms of the recoil library are used to share states between components comforta
 
 The React libraries "react-draggable" and "react-resizable" were used to turn the GIFs into draggable objects that the user can also resize. 
 
-<img src="https://dwglogo.com/wp-content/uploads/2017/09/1460px-React_logo.png" alt="React.js logo" height="200"/>
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/CSS3_and_HTML5_logos_and_wordmarks.svg/2560px-CSS3_and_HTML5_logos_and_wordmarks.svg.png" alt="React.js logo" height="200"/>
+<img src="https://dwglogo.com/wp-content/uploads/2017/09/1460px-React_logo.png" alt="React.js logo" height="200"/><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/CSS3_and_HTML5_logos_and_wordmarks.svg/2560px-CSS3_and_HTML5_logos_and_wordmarks.svg.png" alt="React.js logo" height="200"/>
 
 
 ----
@@ -31,6 +30,7 @@ After downloading, prior to starting the app for the first time, run “npm inst
 
 <h3>Using the application</h3>
 Our app is quite straight-forward. 
+
 1. Click the "Upload your video" button and choose a video from your system to upload to the app. If you want to upload a different video, you can choose a new file any time.
 2. You can now see your video on screen, as well as the video controls below. The timeline does now match the video length and the video is displayed as the first element on the timeline.
 3. In the GIF section to the right, choose a GIF you want to use in your video by clicking on it and dragging it onto the video. When you drop the GIF onto the video, it appears as a new element on the timeline. 
