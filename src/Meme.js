@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Draggable from 'react-draggable';
+import Resizable from 'react-resizable-box'
 import './css/styles.css';
 import { imageListState, timeState} from './atoms';
 import { useRecoilState } from 'recoil';
@@ -12,6 +13,8 @@ function Meme({ url, name, id }) {
     const [loadImage, setLoadImage] = useState(false);
     const [x, setX] = useState(0);
     const [y, setY] = useState(0);
+    const [width, setWidth] = useState(100);
+    const [height, setHeight] = useState(100);
 
     let foundGif;
     let gif;
@@ -32,27 +35,45 @@ function Meme({ url, name, id }) {
     }
 
     for (let i = 0; i < imageList.length; i++) {
-        if (imageList[i].id == id) foundGif = imageList[i];
+        if (imageList[i].id === id) foundGif = imageList[i];
     }
 
     if (displayGif1Initially) {
-        gif = <Draggable id={id} position={{ x: x, y: y }}
-            onStop={(event, dragElement) => {
-                setX(dragElement.x);
-                setY(dragElement.y);
-                uploadImage(url, id);
-            }} style={{ zIndex: 2 }}>
-            <img draggable="false" display="inline-block" src={url} alt={name} className="equal-size" />
-        </Draggable>
+        gif = 
+        <Resizable
+        width={width}
+        height={height}
+        minWidth={50}
+        minHeight={50}
+        maxWidth={200}
+        maxHeight={200}>
+            <Draggable id={id} position={{ x: x, y: y }}
+                onStop={(event, dragElement) => {
+                    setX(dragElement.x);
+                    setY(dragElement.y);
+                    uploadImage(url, id);
+                }} style={{ zIndex: 2 }}>
+                <img draggable="false" display="inline-block" src={url} alt={name} className="equal-size" />
+            </Draggable>
+        </Resizable>
     } else {
         if (foundGif != null && time > foundGif.startTime && time < foundGif.endTime) {
-            gif = <Draggable id={id} position={{ x: x, y: y }}
+            gif = 
+            <Resizable
+                width={width}
+                height={height}
+                minWidth={50}
+                minHeight={50}
+                maxWidth={200}
+                maxHeight={200}>
+            <Draggable id={id} position={{ x: x, y: y }}
                 onStop={(event, dragElement) => {
                     setX(dragElement.x);
                     setY(dragElement.y);
                 }} style={{ zIndex: 2 }}>
                 <img draggable="false" display="inline-block" src={url} alt={name} className="equal-size" />
             </Draggable>
+            </Resizable>
         } else {
             gif = <div />
         }
