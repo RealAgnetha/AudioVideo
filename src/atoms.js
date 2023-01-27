@@ -37,7 +37,6 @@ export const videoListState = atom({
     default: 0
   })
 
-
   export const scaleState = atom({
     key: 'scaleState',
     default: 1
