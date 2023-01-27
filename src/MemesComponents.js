@@ -31,27 +31,13 @@ function MemesComponent() {
                       id={5}
                       name={"reverse uno card"}/>
                 <Meme url={"https://media.tenor.com/3QNUdJR3PUgAAAAj/twitch-youngmulti.gif"}
-                      id={7}
+                      id={6}
                       name={"literally fire"}/>
                 <Meme url={"https://media.tenor.com/BP70qe8X0J8AAAAM/crycat-crying-cat.gif"}
                       id={7}
                       name={"crying cat"}/>
                 <Meme url={"https://media.giphy.com/media/5i7umUqAOYYEw/giphy.gif"}
                       id={8}
-                      name={"OMG cat"}/>
-
-                <Meme url={"https://media.giphy.com/media/5i7umUqAOYYEw/giphy.gif"}
-                      id={9}
-                      name={"OMG cat"}/>
-                <Meme url={"https://media.giphy.com/media/5i7umUqAOYYEw/giphy.gif"}
-                      id={10}
-                      name={"OMG cat"}/>
-                <Meme
-                    url={"https://media.giphy.com/media/5i7umUqAOYYEw/giphy.gif"}
-                    id={11}
-                    name={"OMG cat"}/>
-                <Meme url={"https://media.giphy.com/media/5i7umUqAOYYEw/giphy.gif"}
-                      id={12}
                       name={"OMG cat"}/>
             </div>
         </div>
