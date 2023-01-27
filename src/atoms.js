@@ -1,6 +1,7 @@
 
 import {atom} from 'recoil';
 
+//following states are shared between components that use them
 
 export const videoListState = atom({
     key: 'videoListState',

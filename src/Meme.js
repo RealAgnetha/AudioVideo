@@ -18,12 +18,15 @@ function Meme({ url, name, id }) {
     let gif;
 
     function uploadImage(img, id) {
+
+        //check if the default null-element is still in videoList -> no video has been uploaded -> return
         if (videoList[0].src == null) {
             alert("please upload a video first");
             setX(0);
             setY(0);
             return;
         } else {
+            //add the image to the imageList
             setLoadImage(true);
             if (img !== null) {
                 var image = new Image();
@@ -44,6 +47,8 @@ function Meme({ url, name, id }) {
         if (imageList[i].id == id) foundGif = imageList[i];
     }
 
+    //if this component is rendered initally or the initalState bool is set to true
+    // -> display the image and call uploadImage after it has been dragged from its initial position
     if (inInitialState) {
         gif = <Draggable id={id} position={{ x: x, y: y }}
             onStop={(event, dragElement) => {
@@ -54,6 +59,8 @@ function Meme({ url, name, id }) {
             <img draggable="false" display="inline-block" src={url} alt={name} className="equal-size" />
         </Draggable>
     } else {
+        //display the following img if it is in the imageList 
+        //and the current time of the video overlaps with the playtime of the image 
         if (foundGif != null && time > foundGif.startTime && time < foundGif.endTime) {
             gif = <Draggable id={id} position={{ x: x, y: y }}
                 onStop={(event, dragElement) => {
@@ -62,7 +69,9 @@ function Meme({ url, name, id }) {
                 }} style={{ zIndex: 2 }}>
                 <img draggable="false" display="inline-block" src={url} alt={name} className="equal-size" />
             </Draggable>
-        } else if (foundGif == null) {
+        } 
+        //if this component is not found in the imageList set it to its initial state
+        else if (foundGif == null) {
             setX(0);
             setY(0);
             setInInitialState(true);
