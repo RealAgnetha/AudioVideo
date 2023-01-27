@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Draggable from 'react-draggable';
 import './css/styles.css';
-import { imageListState, timeState, videoListState} from './atoms';
+import { imageListState, timeState, videoListState } from './atoms';
 import { useRecoilState } from 'recoil';
 
 
@@ -18,12 +18,12 @@ function Meme({ url, name, id }) {
     let gif;
 
     function uploadImage(img, id) {
-        if(videoList[0].src==null){
+        if (videoList[0].src == null) {
             alert("please upload a video first");
             setX(0);
             setY(0);
             return;
-        }else{
+        } else {
             setLoadImage(true);
             if (img !== null) {
                 var image = new Image();
@@ -62,7 +62,7 @@ function Meme({ url, name, id }) {
                 }} style={{ zIndex: 2 }}>
                 <img draggable="false" display="inline-block" src={url} alt={name} className="equal-size" />
             </Draggable>
-        } else {
+        } else if (foundGif == null) {
             setInInitialState(true);
             setX(0);
             setY(0);
