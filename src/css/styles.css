@@ -164,7 +164,6 @@ label:hover {
     justify-content: center;
     max-height: 800px;
     background-color: #fbfffd;
-
     position: relative;
 
 }
@@ -203,9 +202,30 @@ button {
     border-color: white;
 }
 
-button:hover {
-    background: #ff68c5;
+input[type=range] {
+  width: 20%;
+  border-radius: 10px;
+  background-color: transparent;
+  -webkit-appearance: none;
 }
+
+input[type=range]::-webkit-slider-runnable-track {
+  background: #ffb9e4;
+  border: 0.2px solid #ffffff;
+  width: 80%;
+  height: 30px;
+  cursor: pointer;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  width: 16px;
+  height: 28px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
 
 .wrapper-video {
     padding-top: 100px;
