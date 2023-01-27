@@ -134,11 +134,6 @@ const EditorComponent = React.memo(({isPlaying, setIsPlaying}) => {
                         <button onClick={handleClick}>Pause</button>
                     )}
                 </div>
-                <TimePanel
-                    style={{
-                        display: fileSelected ? "block" : "none"
-                    }}/>
-
             </div>
 
             <div className="file-select">

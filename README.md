@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+<h1>Welcome to Meme Editor!</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+This is a project we made for the class Audio- und Videotechnik (Audio and video technology) at HTW Berlin (Berlin University of Applied Sciences for Engineering and Economics).
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<h3>Idea</h2>
+For our class, we wanted to create a web app that allows a user to add memes to a video. It’s a quick browser-based editor that already provides the memes, so you don’t have to search them. Just open and play around :)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-----
 
-### `npm test`
+<h3>Tech Stack</h3>
+Our app was created with React.js, CSS3 and HTML5.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The timeline below the video player was made using the visjs-timeline library, which is a dynamic, browser based visualization library.
 
-### `npm run build`
+Atoms of the recoil library are used to share states between components comfortably.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The React libraries "react-draggable" and "react-resizable" were used to turn the GIFs into draggable objects that the user can also resize. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<img src="https://dwglogo.com/wp-content/uploads/2017/09/1460px-React_logo.png" alt="React.js logo" height="200"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/CSS3_and_HTML5_logos_and_wordmarks.svg/2560px-CSS3_and_HTML5_logos_and_wordmarks.svg.png" alt="React.js logo" height="200"/>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+----
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<h3>Starting the application</h3>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+After downloading, prior to starting the app for the first time, run “npm install” in the project directory to install all needed dependencies. Afterwards, the project can be started by running “npm start” in the project directory. When loaded, it will run on local port 3000. If the browser window doesnt pop up automatically, open http://localhost:3000 in your browser.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<h3>Using the application</h3>
+Our app is quite straight-forward. 
+1. Click the "Upload your video" button and choose a video from your system to upload to the app. If you want to upload a different video, you can choose a new file any time.
+2. You can now see your video on screen, as well as the video controls below. The timeline does now match the video length and the video is displayed as the first element on the timeline.
+3. In the GIF section to the right, choose a GIF you want to use in your video by clicking on it and dragging it onto the video. When you drop the GIF onto the video, it appears as a new element on the timeline. 
+4. You can now edit the position by dragging the GIF around, resize it by ??????? and modify the start and end of the GIF by dragging the element on the timeline or resizing it xxxxxxxx You can remove a GIF by clicking on the element and then clicking on the red x that appears.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+<h3>Features</h3>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Upload video**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Lets the user upload a video from their own device. Since you can't really style input forms, the actual button is hidden behind a label that is styled like a button. Changes after first upload :)
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**Video player**
 
-### Analyzing the Bundle Size
+Player for the video the user has uploaded.
+Has a custom play-button and a custom volume control. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**Drag GIFs onto video**
 
-### Making a Progressive Web App
+Drag gifs from the container onto the video.
+There's a canvas behind the video element, so other elements can be dragged and displayed on top of the video while it's played.
+The GIFs we used are from either giphy.com or tenor.com, which are free-to-use content platforms that specialize on GIFs.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+**Edit GIFs**
 
-### Advanced Configuration
+resize and reposition
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+**Timeline**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+The timeline is linked to the video and displays video length and the video itself as default element.
+All added GIF elements are added in the next line. 
 
-### `npm run build` fails to minify
+**Edit video**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Memes can be moved on or removed from the timeline to create a video with memes.
+
+
+---
+
+
+<h3>Prototypes</h2>
+
+Prior to starting development of our digital prototype, we created multiple paper prototypes that match our idea. They were all pretty similar – one video component, a timeline editor and a set of memes to choose from. Below the paper prototype our digital prototype is closest to.
+
+//photos paper prototypes
+
+// *will post better pictures later, best way to do it is dropping them in the online editor actually*
+
+![Img 1](./public/img1.png)
+
+
+
+Since this is a prototype, there are many possibilities to improve and scale up. As of now, we only added one track line to manage added GIFs. In a bigger project, more track lines can be added to also include audio memes and video memes. 
+
+
+
+
