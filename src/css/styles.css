@@ -81,7 +81,7 @@ label:hover {
 }
 
 .header-container h1 {
-    font-size: 5rem;
+    font-size: 10rem;
     margin: 0;
     color: #ffb9e4;
     animation: light-reflection 1s linear infinite;
