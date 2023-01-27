@@ -3,18 +3,10 @@
     src: url('../../fonts/Purple Smile.ttf') format('truetype');
 }
 
-h1 {
-    font-family: 'Font', serif;
-    font-style: italic;
-    align-self: center;
-    text-align: center;
-    color: #ff8fd1;
-}
-
 body {
     padding-top: 50px;
     transition: background-color .3s ease, color .3s ease;
-    background-color: mintcream;
+    background-color: #ddffef;
     padding-bottom: 100px;
 }
 
@@ -26,10 +18,59 @@ body {
     align-items: flex-start;
 }
 
+h1 {
+    font-family: 'Font', serif;
+    font-style: italic;
+    align-self: center;
+    text-align: center;
+    color: #ff8fd1;
+}
+
+input[type="file"] {
+    display: none;
+}
+
 label {
     font-family: 'Font', serif;
-    color: #FF8FD1FF;
+    color: white;
+    background: #ffb9e4;
+    padding: 8px;
+    border-radius: 10px;
+    box-shadow: 6px 8px 8px -4px lightblue;
 }
+
+label:hover {
+    background: #ff68c5;
+}
+
+
+.timeline {
+    width: 100%; /* Set the width of the element to fill its parent container */
+    height: 40px; /* Set the height of the element */
+    background-color: #ffc5e7; /* Set a background color for the element */
+    overflow: auto; /* Set the overflow property to 'auto' to enable scrolling */
+    position: relative; /* Set the position property to 'relative' */
+}
+
+.progress-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: #ff97cf;
+}
+
+.layer {
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 40px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
 
 .header-container {
     width: 100%;
@@ -73,43 +114,97 @@ label {
 
 .edit_video {
     padding-top: 20px;
-    width: 60%;
+    width: 100%;
     float: left;
 }
 
-.wrapper-memes {
-    display: flex;
+.gifs-container, .pngs-container {
+    padding-left: 50px;
+    padding-right: 50px;
     flex-direction: column;
-    border: 4px solid #ffb9e4;
-    border-radius: 10px; /*  rounded corners */
-    padding: 50px;
     align-items: center;
     justify-content: center;
-    /*overflow-y: scroll;*/
-    max-height: 500px;
+    overflow-y: scroll;
+    flex-wrap: wrap;
+}
+
+.cell {
+    max-width: 25%;
+    padding: 15px;
+}
+
+.wrapper-memes {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    border: 4px solid #ffb9e4;
+    border-radius: 10px; /*  rounded corners */
+    max-height: 800px;
     background-color: #fbfffd;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center; /*allows elements to wrap onto new lines when the container is not wide enough
+   */
+}
+
+
+.equal-size {
+    width: 100%;
+    height: 100%;
+}
+
+
+.wrapper-memes-no-scroll {
+    display: flex;
+    flex-direction: column;
+    border: 4px solid #fd7bce;
+    border-radius: 10px; /*  rounded corners */
+    align-items: center;
+    justify-content: center;
+    max-height: 800px;
+    background-color: #fbfffd;
+
+    position: relative;
+
+}
+
+
+.react-tabs__tab-list {
+    display: flex;
+    list-style: none;
+}
+
+.react-tabs__tab {
+    padding: 5px 10px;
+    margin-right: 10px;
+}
+
+.react-tabs__tab {
+    border: 1px solid #ffb9e4;
 }
 
 ::-webkit-scrollbar {
     width: 10px;
 }
+
 ::-webkit-scrollbar-thumb {
     background-color: #ffebf7;
     -webkit-border-radius: 100px;
 }
 
 button {
-    background-color: #ffb9e4;
-    border-color: white;
+    font-family: 'Font', serif;
     color: white;
-}
-input[type="file"] {
-    color: #ffb9e4;
+    background: #ffb9e4;
+    padding: 8px 12px;
+    border-radius: 10px;
+    box-shadow: 6px 8px 8px -4px lightblue;
+    border-color: white;
 }
 
-.equal-size {
-    width: 150px;
-    height: 150px;
+button:hover {
+    background: #ff68c5;
 }
 
 .wrapper-video {
@@ -132,140 +227,28 @@ input[type="file"] {
     display: none;
 }
 
+.stop-scrolling {
+    overflow: hidden;
+}
+
 .canvas-style {
     width: 100%;
     z-index: 2;
     position: absolute;
 }
 
-.video-styles {
+.video-style {
     width: 100%;
     height: 100%;
     z-index: 1;
 }
 
-.edit_video {
-    padding-top: 20px;
+.controls-container {
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
-.progress-bar-style {
-    height: 10px;
-    background-color: #ffb9e4;
-    position: relative;
-    bottom: 10px;
-    left: 0;
-    cursor: pointer;
-}
 
-img {
-    padding: 20px;
-}
-
-/*sry das hier ist voll reingehackt weil die proper lösung sehr friemelig war vllt mach ich das noch gescheit*/
 .img2 {
     padding-top: 1500px;
-}
-
-
-/**The following are premade and i didnt modify them or use them yet*/
-.toggle {
-    background-color: rgb(185, 185, 185);
-    color: yellow;
-    height: 2em;
-    width: 2em;
-    text-align: center;
-    line-height: 2em;
-    vertical-align: middle;
-    border-radius: 100em;
-    font-size: x-large;
-    z-index: 100;
-    position: fixed;
-    bottom: 1em;
-    right: 1em;
-    cursor: pointer;
-    transition: background-color .2s ease;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-}
-
-.toggle:hover {
-    transition: background-color .2s ease;
-    background-color: rgb(146, 146, 146);
-}
-
-.playback {
-    position: relative;
-    height: 10px;
-    background: #2f3b44;
-    margin: 1rem 24px;
-    border-radius: 1em;
-}
-
-.playback .seekable {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgb(240, 240, 240);
-    cursor: pointer;
-}
-
-.playback .grabber {
-    position: absolute;
-    top: -4px;
-    bottom: -4px;
-    width: 18px;
-    border-radius: 2px;
-    z-index: 1;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.playback .grabber.start {
-    background: #a8d736;
-}
-
-.playback .grabber.end {
-    background: #fc4242;
-}
-
-.playback .grabber:hover {
-    transform: scaleY(1.4);
-}
-
-.playback .grabber svg {
-    user-drag: none;
-    -moz-user-select: none;
-    -webkit-user-drag: none;
-}
-
-.playback .progress {
-    background: #0072cf;
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    cursor: pointer;
-    pointer-events: none;
-}
-
-.warning {
-    padding: 0.8em;
-    color: #da7f00;
-    background-color: #ffecd1;
-    border-radius: 0.3em;
-    border: 0.1em solid #f0ad4e;
-    margin: 1em;
-    justify-content: center;
-    text-align: center;
-}
-
-canvas {
-    pointer-events: none;
 }
