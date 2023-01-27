@@ -20,6 +20,7 @@ const EditorComponent = React.memo(({isPlaying, setIsPlaying}) => {
     const [play, setPlay] = useRecoilState(playState);
     const [time, setTime] = useRecoilState(timeState);
     const [zoom, setZoom] = useRecoilState(zoomState)
+    const [volume, setVolume] = useState(1);
 
     let intervalId;
 
@@ -117,6 +118,7 @@ const EditorComponent = React.memo(({isPlaying, setIsPlaying}) => {
                 />
                 <video
                     id="videoid"
+                    volume={volume}
                     ref={videoRef}
                     className={`video-style ${fileSelected ? 'file-selected' : 'file-not-selected'}`}
                     onTimeUpdate={handleTimeUpdate}
@@ -133,6 +135,18 @@ const EditorComponent = React.memo(({isPlaying, setIsPlaying}) => {
                     {isPlaying && (
                         <button onClick={handleClick}>Pause</button>
                     )}
+                    <input 
+                        type="range" 
+                        min={0} 
+                        max={1} 
+                        step={0.01} 
+                        value={volume} 
+                        onChange={(e) => {
+                        const newVolume = e.target.value;
+                        setVolume(newVolume);
+                        document.getElementById('videoid').volume = newVolume;
+                        }} 
+                    />
                 </div>
             </div>
 
