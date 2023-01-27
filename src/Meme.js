@@ -63,9 +63,9 @@ function Meme({ url, name, id }) {
                 <img draggable="false" display="inline-block" src={url} alt={name} className="equal-size" />
             </Draggable>
         } else if (foundGif == null) {
-            setInInitialState(true);
             setX(0);
             setY(0);
+            setInInitialState(true);
         }
     }
 
