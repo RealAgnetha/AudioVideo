@@ -22,7 +22,6 @@ function Meme({ url, name, id }) {
 
         //check if the default null-element is still in videoList -> no video has been uploaded -> return
         if (videoList[0].src == null) {
-            // alert("please upload a video first");
             setX(0);
             setY(0);
         } else {
@@ -34,7 +33,7 @@ function Meme({ url, name, id }) {
                 let newArr = [...imageList];
                 let scaling = 1;
                 if (image.width > 400) scaling = 400 / image.width;
-                newArr.push({ "id": id, group: "image", "src": image.src, "x": x, "y": y, width: image.width * scaling, height: image.height * scaling, startTime: time-1, endTime: 5000 });
+                newArr.push({ "id": id, group: "image", "src": image.src, "x": x, "y": y, width: image.width * scaling, height: image.height * scaling, startTime: time - 1, endTime: time + 5000 });
                 setImageList(newArr);
                 setLoadImage(false);
                 setInInitialState(false);
@@ -51,44 +50,43 @@ function Meme({ url, name, id }) {
     // -> display the image and call uploadImage after it has been dragged from its initial position
     if (inInitialState) {
         gif =
-                <Draggable id={id}
-                           position={{ x: x, y: y }}
-                           onStop={(event, dragElement) => {
-                               setX(dragElement.x);
-                               setY(dragElement.y);
-                               uploadImage(url, id);
-                           }}
-                           style={{ zIndex: 2 }}
-                >
-                    <img draggable="false" src={url} alt={name} className="equal-size" />
-                </Draggable>
+            <Draggable id={id}
+                position={{ x: x, y: y }}
+                onStop={(event, dragElement) => {
+                    setX(dragElement.x);
+                    setY(dragElement.y);
+                    uploadImage(url, id);
+                }}
+                style={{ zIndex: 2 }}
+            >
+                <img draggable="false" src={url} alt={name} className="equal-size" />
+            </Draggable>
     } else {
         //display the following img if it is in the imageList
         //and the current time of the video overlaps with the playtime of the image
         if (foundGif != null && time > foundGif.startTime && time < foundGif.endTime) {
             gif =
-            <Draggable id={id}
-                       position={{ x: x, y: y }}
-                onStop={(event, dragElement) => {
-                    setX(dragElement.x);
-                    setY(dragElement.y);
-                }}
-                style={{ zIndex: 2 }}>
-                <img draggable="false" src={url} alt={name} className="equal-size"/>
-            </Draggable>
-        }
-        else if (foundGif != null && time < foundGif.startTime - 1 || time > foundGif.endTime) {
-            gif = <Draggable id={id} position={{ x: 0, y: 0 }}
-                             onStop={(event, dragElement) => {
-                                 setX(dragElement.x);
-                                 setY(dragElement.y);
-                             }} style={{ zIndex: 2 }}>
-                <img draggable="false" src={url} alt={name} className="equal-size" />
-            </Draggable>
-        }
-        else {
-            //if this component is not found in the imageList set it to its initial state
-            if (foundGif == null){
+                <Draggable id={id}
+                    position={{ x: x, y: y }}
+                    onStop={(event, dragElement) => {
+                        setX(dragElement.x);
+                        setY(dragElement.y);
+                    }}
+                    style={{ zIndex: 2 }}>
+                    <img draggable="false" src={url} alt={name} className="equal-size" />
+                </Draggable>
+        } else {
+            if (foundGif != null && (time < foundGif.startTime - 1 || time > foundGif.endTime)) {
+                gif = <Draggable id={id} position={{ x: 0, y: 0 }}
+                    onStop={(event, dragElement) => {
+                        setX(dragElement.x);
+                        setY(dragElement.y);
+                    }} style={{ zIndex: 2 }}>
+                    <img id="hidden" draggable="false" src={url} alt={name} className="equal-size" />
+                </Draggable>
+                
+            } else {
+                //if this component is not found in the imageList set it to its initial state
                 setX(0);
                 setY(0);
                 setInInitialState(true);
@@ -98,8 +96,8 @@ function Meme({ url, name, id }) {
 
     return (
         <div className="cell">
-          {gif}
-       </div>
+            {gif}
+        </div>
     );
 }
 

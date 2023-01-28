@@ -54,6 +54,7 @@ function TimePanel() {
     }
 
     function deleteimageinatom(id) {
+    
         setImageList(imageList.filter((image) => image.id !== id));
     }
 
