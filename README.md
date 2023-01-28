@@ -5,12 +5,12 @@ This is a project we made for the class Audio- und Videotechnik (Audio and video
 
 
 
-<h3>Idea</h2>
+<h3>Idea</h3>
 For our class, we wanted to create a web app that allows a user to add memes to a video. It’s a quick browser-based editor that already provides the memes, so you don’t have to search them.
 
 
 
-<h3>Prototypes</h2>
+<h3>Prototypes</h3>
 
 Prior to starting development of our digital prototype, we created multiple paper prototypes that match our idea. They were all pretty similar – one video component, a timeline editor and a set of memes to choose from. Below the paper prototype our digital prototype is closest to.
 
