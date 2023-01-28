@@ -1,6 +1,7 @@
 
 import {atom} from 'recoil';
 
+//following states are shared between components that use them
 
 export const videoListState = atom({
     key: 'videoListState',
@@ -36,7 +37,6 @@ export const videoListState = atom({
     key: 'elementState',
     default: 0
   })
-
 
   export const scaleState = atom({
     key: 'scaleState',
