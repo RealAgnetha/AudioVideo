@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import Draggable from 'react-draggable';
-import Resizable from 'react-resizable-box'
 import './css/styles.css';
 import { imageListState, timeState, videoListState } from './atoms';
 import { useRecoilState } from 'recoil';
@@ -35,7 +34,7 @@ function Meme({ url, name, id }) {
                 let newArr = [...imageList];
                 let scaling = 1;
                 if (image.width > 400) scaling = 400 / image.width;
-                newArr.push({ "id": id, group: "image", "src": image.src, "x": x, "y": y, width: image.width * scaling, height: image.height * scaling, startTime: 0, endTime: 10000 });
+                newArr.push({ "id": id, group: "image", "src": image.src, "x": x, "y": y, width: image.width * scaling, height: image.height * scaling, startTime: time-1, endTime: 5000 });
                 setImageList(newArr);
                 setLoadImage(false);
                 setInInitialState(false);
