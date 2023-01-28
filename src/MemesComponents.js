@@ -39,6 +39,25 @@ function MemesComponent() {
                 <Meme url={"https://media.giphy.com/media/5i7umUqAOYYEw/giphy.gif"}
                       id={8}
                       name={"OMG cat"}/>
+
+                <Meme url={"https://media.giphy.com/media/d3mlE7uhX8KFgEmY/giphy.gif"}
+                      id={9}
+                      name={"smort"}/>
+                <Meme url={"https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif"}
+                      id={10}
+                      name={"what now"}/>
+                <Meme url={"https://media.giphy.com/media/kaq6GnxDlJaBq/giphy.gif"}
+                      id={11}
+                      name={"uhhhh"}/>
+                <Meme url={"https://media.giphy.com/media/Um3ljJl8jrnHy/giphy.gif"}
+                      id={12}
+                      name={"poof"}/>
+                <Meme url={"https://media.giphy.com/media/cF7QqO5DYdft6/giphy.gif"}
+                      id={13}
+                      name={"destroyed"}/>
+                <Meme url={" https://media.giphy.com/media/l4Jz3a8jO92crUlWM/giphy.gif"}
+                      id={14}
+                      name={"sprinkle"}/>
             </div>
         </div>
     );
