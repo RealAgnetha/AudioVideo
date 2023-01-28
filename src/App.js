@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {RecoilRoot} from 'recoil';
-import Header from './Header';
+import {Header} from './Header';
 import { EditorComponent } from "./EditorComponent.js";
 import MemesComponents from "./MemesComponents";
 import './css/styles.css';

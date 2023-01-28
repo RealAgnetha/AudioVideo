@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 const Header = () => {
     return (
         <header className="header-container">
@@ -7,4 +7,4 @@ const Header = () => {
     );
 }
 
-export default Header;
+export {Header};
