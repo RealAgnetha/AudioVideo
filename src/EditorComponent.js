@@ -1,8 +1,6 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {playState, timeState, videoListState, zoomState} from './atoms';
 import {useRecoilState} from 'recoil';
-import TimePanel from './Timepanel';
-
 
 const EditorComponent = React.memo(({isPlaying, setIsPlaying}) => {
     const wrapperRef = useRef(null);
@@ -20,9 +18,9 @@ const EditorComponent = React.memo(({isPlaying, setIsPlaying}) => {
     const [play, setPlay] = useRecoilState(playState);
     const [time, setTime] = useRecoilState(timeState);
     const [zoom, setZoom] = useRecoilState(zoomState)
+    const [volume, setVolume] = useState(1);
 
     let intervalId;
-
 
     useEffect(() => {
         if (!img) return;
@@ -45,7 +43,7 @@ const EditorComponent = React.memo(({isPlaying, setIsPlaying}) => {
         console.log(file); // Log the selected file
         const url = URL.createObjectURL(file);
         videoRef.current.src = url;
-        // create a hidden video element 
+        // create a hidden video element
         const video = document.createElement('video');
         // set the file object URL as the src of the video element
         video.src = url;
@@ -106,10 +104,11 @@ const EditorComponent = React.memo(({isPlaying, setIsPlaying}) => {
 
     return (
 
-        <div className="left-side">
+        <div>
 
             <div ref={wrapperRef} className="wrapper-video">
                 <canvas
+                    id ="canvasElement"
                     ref={canvasRef}
                     className={`canvas-style ${fileSelected ? 'file-selected' : 'file-not-selected'}`}
                     width={videoRef.current ? videoRef.current.offsetWidth : 0}
@@ -117,11 +116,11 @@ const EditorComponent = React.memo(({isPlaying, setIsPlaying}) => {
                 />
                 <video
                     id="videoid"
+                    // volume={volume}
                     ref={videoRef}
                     className={`video-style ${fileSelected ? 'file-selected' : 'file-not-selected'}`}
                     onTimeUpdate={handleTimeUpdate}
                 />
-
 
                 <div className="controls-container"
                      style={{
@@ -133,6 +132,19 @@ const EditorComponent = React.memo(({isPlaying, setIsPlaying}) => {
                     {isPlaying && (
                         <button onClick={handleClick}>Pause</button>
                     )}
+                    <input
+                        id="volumeBar"
+                        type="range"
+                        min={0}
+                        max={1}
+                        step={0.01}
+                        value={volume}
+                        onChange={(e) => {
+                        const newVolume = e.target.value;
+                        setVolume(Number(newVolume));
+                        document.getElementById('videoid').volume = newVolume;
+                        }}
+                    />
                 </div>
             </div>
 

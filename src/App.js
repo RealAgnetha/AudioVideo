@@ -14,12 +14,15 @@ function App() {
             <RecoilRoot>
                 <Header />
                 <div className="grid-container">
-                    <EditorComponent isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
-                    <MemesComponents isPlaying={isPlaying} />
-                    <TimePanel
-                        style={{
-                           margin: "-50px"
-                        }}/>
+                    <div className="left-element-1">
+                        <EditorComponent isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
+                    </div>
+                    <div className="left-element-2">
+                        <TimePanel/>
+                    </div>
+                    <div className="right-element">
+                        <MemesComponents isPlaying={isPlaying} />
+                    </div>
                 </div>
             </RecoilRoot>
         </div>

@@ -29,7 +29,7 @@ function TimePanel() {
         groups.push({ id: "image", content: "&#160" })
         for (let i = 0; i < imageList.length; i++) {
             let image = imageList[i];
-            dataset.push({ id: image.id + videoList.length, className: "image", start: image.startTime, end: image.endTime, content: "image "+ image.id, group: "image" })
+            dataset.push({ id: image.id + videoList.length, className: "image", start: image.startTime, end: image.endTime, content: "Gif "+ image.id, group: "image" })
         }
 
         groups.push({ id: 0, content: "&#160" })
@@ -54,7 +54,7 @@ function TimePanel() {
     }
 
     function deleteimageinatom(id) {
-        setImageList(imageList.filter((image) => image.id != id));
+        setImageList(imageList.filter((image) => image.id !== id));
     }
 
     function changestartinatomvideo(id, newstart, newend) {
@@ -62,11 +62,11 @@ function TimePanel() {
         let newList = [...videoList].map((item) => {
             let newData = { ...item }
             if (item.id === id) {
-                if (newend - newstart != newData.endTime - newData.startTime) {
-                    if (Math.abs(newData.startTime - newstart) != 0) {
+                if (newend - newstart !== newData.endTime - newData.startTime) {
+                    if (Math.abs(newData.startTime - newstart) !== 0) {
                         newData.trimmStart = Math.abs(newData.startTime - newstart)
                     }
-                    if (Math.abs(newData.endTime - newend) != 0) {
+                    if (Math.abs(newData.endTime - newend) !== 0) {
                         newData.trimmEnd = Math.abs(newData.endTime - newend)
                     }
                     newData.startTime = 0;
@@ -154,12 +154,11 @@ function TimePanel() {
 
         onMove: function (item, callback) {
 
-
-            if (item.className == "image") {
+            if (item.className === "image") {
                 changestartinatomimage(item.id, item.start.getTime(), item.end.getTime(), item.group)
             }
 
-            if (item.className == "video") {
+            if (item.className === "video") {
                 changestartinatomvideo(item.id, item.start.getTime(), item.end.getTime())
             }
 
@@ -169,7 +168,6 @@ function TimePanel() {
             let id=item.id-videoList.length;
             deleteimageinatom(id)
         }
-
     }
 
     return (

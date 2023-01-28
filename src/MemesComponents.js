@@ -6,7 +6,7 @@ function MemesComponent() {
     const wrapperRef = useRef(null);
 
     return (
-        <div className="right-side">
+        <div>
             <h1>GIFs</h1>
 
             <div className="wrapper-memes"
