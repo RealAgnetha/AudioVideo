@@ -324,3 +324,7 @@ canvas {
     font-family: 'Font', serif !important;
     color: #ff8fd1 !important;
 }
+
+#hidden {
+    visibility: hidden;
+}
