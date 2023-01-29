@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import Draggable from 'react-draggable';
+import { Resizable } from 're-resizable';
 import './css/styles.css';
 import { imageListState, timeState, videoListState } from './atoms';
 import { useRecoilState } from 'recoil';
@@ -50,6 +51,14 @@ function Meme({ url, name, id }) {
     // -> display the image and call uploadImage after it has been dragged from its initial position
     if (inInitialState) {
         gif =
+        <Resizable 
+            width={width} 
+            height={height} 
+            onResizeStop={(event, direction, ref, d) => {
+                setWidth(width + d.width);
+                setHeight(height + d.height);
+            }}
+        >
             <Draggable id={id}
                 position={{ x: x, y: y }}
                 onStop={(event, dragElement) => {
@@ -61,11 +70,20 @@ function Meme({ url, name, id }) {
             >
                 <img draggable="false" src={url} alt={name} className="equal-size" />
             </Draggable>
+        </Resizable>
     } else {
         //display the following img if it is in the imageList
         //and the current time of the video overlaps with the playtime of the image
         if (foundGif != null && time > foundGif.startTime && time < foundGif.endTime) {
             gif =
+            <Resizable 
+                width={width} 
+                height={height} 
+                onResizeStop={(event, direction, ref, d) => {
+                    setWidth(width + d.width);
+                    setHeight(height + d.height);
+                }}
+            >
                 <Draggable id={id}
                     position={{ x: x, y: y }}
                     onStop={(event, dragElement) => {
@@ -75,16 +93,26 @@ function Meme({ url, name, id }) {
                     style={{ zIndex: 2 }}>
                     <img draggable="false" src={url} alt={name} className="equal-size" />
                 </Draggable>
+            </Resizable>
         } else {
             if (foundGif != null && (time < foundGif.startTime - 1 || time > foundGif.endTime)) {
-                gif = <Draggable id={id} position={{ x: 0, y: 0 }}
-                    onStop={(event, dragElement) => {
-                        setX(dragElement.x);
-                        setY(dragElement.y);
-                    }} style={{ zIndex: 2 }}>
-                    <img id="hidden" draggable="false" src={url} alt={name} className="equal-size" />
-                </Draggable>
-                
+                gif = 
+                <Resizable 
+                    width={width} 
+                    height={height} 
+                    onResizeStop={(event, direction, ref, d) => {
+                        setWidth(width + d.width);
+                        setHeight(height + d.height);
+                    }}
+                >
+                    <Draggable id={id} position={{ x: 0, y: 0 }}
+                        onStop={(event, dragElement) => {
+                            setX(dragElement.x);
+                            setY(dragElement.y);
+                        }} style={{ zIndex: 2 }}>
+                        <img id="hidden" draggable="false" src={url} alt={name} className="equal-size" />
+                    </Draggable>
+                </Resizable>
             } else {
                 //if this component is not found in the imageList set it to its initial state
                 setX(0);

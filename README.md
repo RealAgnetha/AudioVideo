@@ -51,7 +51,8 @@ Our app is quite straight-forward.
 1. Click the "Upload your video" button and choose a video from your system to upload to the app. If you want to upload a different video, you can choose a new file any time.
 2. You can now see your video on screen, as well as the video controls below. The timeline does now match the video length and the video is displayed as the first element on the timeline.
 3. In the GIF section to the right, choose a GIF you want to use in your video by clicking on it and dragging it onto the video. When you drop the GIF onto the video at the desired position, it appears as a new element on the timeline. 
-4. You can now change the timestamp and display time of the GIF by moving it around on the timeline and pulling on the left or right side of the timeline item to change the length in either direction. If you want to remove a GIF, simply click on it - a red "X" will appear and you can delete the item by clicking on it.
+4. To change the size of your GIF, hover over its edges while it is still in the container. You will see common resizing icons that let you change height, width or both. You can also adjust the position of the GIF on the video anytime. 
+5. You can now change the timestamp and display time of the GIF by moving it around on the timeline and pulling on the left or right side of the timeline item to change the length in either direction. If you want to remove a GIF, simply click on it - a red "X" will appear and you can delete the item by clicking on it.
 
 <h3>Features</h3>
 
@@ -74,6 +75,10 @@ The GIFs we used are from either giphy.com or tenor.com, which are free-to-use c
 
 Drag GIFs from the container onto the video.
 There's a canvas behind the video element, so other elements can be dragged and displayed on top of the video while it's played.
+
+**Edit GIFs**
+
+You can resize the GIFs inside the container (height, width or both in relation to original proportion) and drag the resized onto the video. You can also reposition the GIF anytime while it is displayed on screen. 
 
 **Timeline**
 
